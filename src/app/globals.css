@@ -24,3 +24,34 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer utilities {
+  /* "both" = giữ nguyên trạng thái cuối sau animation, tránh bị invisible trên iOS Safari */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out both;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out both;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.4s ease-out both;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}

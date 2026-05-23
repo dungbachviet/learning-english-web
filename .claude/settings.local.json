@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(mkdir -p /Users/bachvietdung/Documents/projects/BVD/learning-english-web/src/app/exam/\\\\[id\\\\]/vocabulary)",
+      "Bash(mkdir -p /Users/bachvietdung/Documents/projects/BVD/learning-english-web/src/app/exam/\\\\[id\\\\]/solving)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(node_modules/.bin/next --version)"
+    ]
+  }
+}

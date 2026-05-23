@@ -1,65 +1,96 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { exams } from '@/data/exams';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="animate-fade-in">
+      {/* Hero section */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+          <span>🎯</span>
+          <span>Luyện thi vào lớp 10</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
+          Chọn đề thi để bắt đầu luyện tập
+        </h2>
+        <p className="text-gray-500 text-sm sm:text-base max-w-md mx-auto">
+          Mỗi đề có 2 chế độ: <strong>Ôn từ vựng</strong> và <strong>Giải đề</strong>. Chăm chỉ luyện tập để đạt điểm cao!
+        </p>
+      </div>
+
+      {/* Stats bar */}
+      <div className="grid grid-cols-3 gap-3 mb-8">
+        <div className="bg-white rounded-xl p-3 text-center shadow-sm border border-gray-100">
+          <div className="text-2xl font-bold text-blue-600">{exams.length}</div>
+          <div className="text-xs text-gray-500 mt-0.5">Đề thi</div>
         </div>
-      </main>
+        <div className="bg-white rounded-xl p-3 text-center shadow-sm border border-gray-100">
+          <div className="text-2xl font-bold text-green-600">
+            {exams.reduce((sum, e) => sum + e.vocabulary.length, 0)}
+          </div>
+          <div className="text-xs text-gray-500 mt-0.5">Từ vựng</div>
+        </div>
+        <div className="bg-white rounded-xl p-3 text-center shadow-sm border border-gray-100">
+          <div className="text-2xl font-bold text-purple-600">
+            {exams.reduce((sum, e) => sum + e.questions.length, 0)}
+          </div>
+          <div className="text-xs text-gray-500 mt-0.5">Câu hỏi</div>
+        </div>
+      </div>
+
+      {/* Exam list */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        {exams.map((exam, index) => (
+          <Link key={exam.id} href={`/exam/${exam.id}`} className="block group">
+            <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-200 group-hover:-translate-y-0.5">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-9 h-9 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-sm">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 text-sm leading-tight">{exam.title}</h3>
+                    {exam.year && (
+                      <span className="text-xs text-gray-400">{exam.year}</span>
+                    )}
+                  </div>
+                </div>
+                <span className="text-blue-400 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+
+              {exam.school && (
+                <p className="text-xs text-gray-500 mb-3 flex items-center gap-1">
+                  <span>🏫</span> {exam.school}
+                </p>
+              )}
+
+              <div className="flex gap-2">
+                <div className="flex-1 bg-green-50 rounded-lg px-2.5 py-1.5 text-center">
+                  <div className="text-green-700 font-semibold text-sm">{exam.vocabulary.length}</div>
+                  <div className="text-green-600 text-xs">Từ vựng</div>
+                </div>
+                <div className="flex-1 bg-purple-50 rounded-lg px-2.5 py-1.5 text-center">
+                  <div className="text-purple-700 font-semibold text-sm">{exam.questions.length}</div>
+                  <div className="text-purple-600 text-xs">Câu hỏi</div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Tips section */}
+      <div className="mt-8 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-4 border border-amber-100">
+        <h3 className="font-bold text-amber-800 mb-2 flex items-center gap-2">
+          <span>💡</span> Mẹo học hiệu quả
+        </h3>
+        <ul className="text-sm text-amber-700 space-y-1">
+          <li>✅ Học từ vựng trước khi giải đề để hiểu câu hỏi tốt hơn</li>
+          <li>✅ Đọc kỹ giải thích sau mỗi câu hỏi để hiểu sâu</li>
+          <li>✅ Luyện mỗi đề thi ít nhất 2-3 lần cho đến khi đạt trên 80%</li>
+          <li>✅ Ôn lại các từ sai ngay sau khi hoàn thành bài</li>
+        </ul>
+      </div>
     </div>
   );
 }
