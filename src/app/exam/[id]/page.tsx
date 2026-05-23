@@ -17,8 +17,8 @@ export default async function ExamDetailPage({ params }: Props) {
   return (
     <div className="animate-fade-in">
       {/* Back button */}
-      <Link href="/" className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-800 text-sm mb-5 group">
-        <span className="group-hover:-translate-x-0.5 transition-transform">←</span>
+      <Link href="/" className="inline-flex items-center gap-2 bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-blue-600 hover:text-blue-700 font-medium rounded-xl px-4 py-2.5 mb-5 shadow-sm transition-all duration-200 group">
+        <span className="text-lg group-hover:-translate-x-0.5 transition-transform">←</span>
         <span>Quay lại danh sách đề</span>
       </Link>
 
