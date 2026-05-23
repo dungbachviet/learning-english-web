@@ -234,9 +234,9 @@ questions: [
     questionText:
       'Choose the best word for the blank:\nPractise your English, _____ friends and see England!',
     options: ['meet', 'build', 'keep', 'make'],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
-      '✅ **A. meet** — "meet friends" = gặp gỡ bạn bè mới. Đây là cách diễn đạt tự nhiên trong quảng cáo du học.\n\n❌ **B. build** — "build friends" là sai collocation\n❌ **C. keep** — "keep friends" = duy trì tình bạn, không phù hợp ngữ cảnh\n❌ **D. make** — thường dùng "make friends" chứ không dùng trực tiếp "friends" sau "make" ở đây\n\n💡 Very common phrase: make friends / meet new people.',
+      '✅ **D. make** — "make friends" là collocation rất phổ biến, có nghĩa là "kết bạn". Đây là cách diễn đạt tự nhiên trong quảng cáo du học hoặc du lịch.\n\n❌ **A. meet** — "meet friends" nghĩa là gặp bạn bè đã quen, không phù hợp bằng "make friends" trong ngữ cảnh này.\n❌ **B. build** — "build friends" là sai collocation.\n❌ **C. keep** — "keep friends" nghĩa là duy trì tình bạn, không phù hợp ngữ cảnh.\n\n💡 Common phrase: **make friends** = kết bạn.',
   },
 
   {
