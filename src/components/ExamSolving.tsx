@@ -49,6 +49,32 @@ function formatTime(totalSeconds: number): string {
   return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
+/**
+ * Render text with **bold** markdown support and newline → <br/> support.
+ * Dùng cho questionText, passage, explanation.
+ * Ví dụ: "l**ea**f" → l<strong>ea</strong>f
+ */
+function renderBoldText(text: string) {
+  const lines = text.split('\n');
+  return (
+    <>
+      {lines.map((line, lineIdx) => {
+        const parts = line.split(/(\*\*.*?\*\*)/g);
+        return (
+          <span key={lineIdx}>
+            {lineIdx > 0 && <br />}
+            {parts.map((part, i) =>
+              part.startsWith('**') && part.endsWith('**') && part.length > 4
+                ? <strong key={i}>{part.slice(2, -2)}</strong>
+                : part
+            )}
+          </span>
+        );
+      })}
+    </>
+  );
+}
+
 export default function ExamSolving({ exam }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -276,13 +302,13 @@ export default function ExamSolving({ exam }: Props) {
 
         {currentQuestion.passage && (
           <div className="bg-blue-50 rounded-xl p-4 mb-4 border-l-4 border-blue-400">
-            <p className="text-sm text-blue-600 font-medium mb-2">📖 Đọc đoạn văn sau:</p>
-            <p className="text-base text-gray-700 leading-relaxed italic">{currentQuestion.passage}</p>
+            <p className="text-sm text-blue-600 font-medium mb-2">📖 Read the following passage:</p>
+            <p className="text-base text-gray-700 leading-relaxed">{renderBoldText(currentQuestion.passage)}</p>
           </div>
         )}
 
         <p className="text-lg text-gray-800 font-medium mb-5 leading-relaxed">
-          {currentQuestion.questionText}
+          {renderBoldText(currentQuestion.questionText)}
         </p>
 
         <div className="space-y-3">
@@ -353,7 +379,7 @@ export default function ExamSolving({ exam }: Props) {
           </div>
           <div className="bg-white rounded-xl p-3 border border-gray-100">
             <p className="text-sm text-gray-400 font-medium mb-1">💡 Giải thích:</p>
-            <p className="text-base text-gray-700 leading-relaxed">{currentQuestion.explanation}</p>
+            <p className="text-base text-gray-700 leading-relaxed">{renderBoldText(currentQuestion.explanation)}</p>
           </div>
         </div>
       )}

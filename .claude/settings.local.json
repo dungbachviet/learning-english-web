@@ -8,7 +8,11 @@
       "Bash(npm run *)",
       "Bash(curl -s http://localhost:3000)",
       "Bash(pkill -f \"next dev\")",
-      "Bash(node_modules/.bin/next --version)"
+      "Bash(node_modules/.bin/next --version)",
+      "Bash(textutil -convert txt -stdout \"ĐỀ SỐ_21.docx\")",
+      "Bash(textutil -convert txt -stdout \"/Users/bachvietdung/Documents/projects/BVD/learning-english-web/ĐỀ SỐ_21.docx\")",
+      "Bash(npx next *)",
+      "Bash(curl -s http://localhost:3001)"
     ]
   }
 }
