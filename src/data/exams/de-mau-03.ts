@@ -8,30 +8,11 @@
  */
 import { Exam } from '@/types';
 
-// Đoạn thông báo — blanks in bold for easy spotting
-const PASSAGE_CHARLES_SCHOOL =
-  `📢 CHARLES SCHOOL — Learn English in England\n\n` +
-  `Learn English in one of our three schools for the best experience at the lowest **(1)_____**. ` +
-  `Choose from London, Oxford or Cambridge. Practise your English, **(2)_____** friends and see England!\n\n` +
-  `• General English: Improve your speaking, listening, reading and writing.\n` +
-  `• Intensive course: 31 hours/week, Monday–Thursday 9 a.m.–5 p.m., Friday 9 a.m.–12 p.m.\n` +
-  `• Part-time course: 15 hours/week, mornings, afternoons **(3)_____** evenings.\n` +
-  `• Exam preparation: Extra focus **(4)_____** grammar and vocabulary — 19 hours/week.`;
-
-// Đoạn văn kể chuyện — for Q5 & Q6
-const PASSAGE_AMUSEMENT_PARK =
-  `We had an amazing time at the amusement park yesterday. ` +
-  `Things didn't go exactly as planned, however. _____\n\n` +
-  `a. We were all set to ride the roller coaster, but then the ride broke down **unexpectedly**, ` +
-  `and we had to wait for over an hour for it to be fixed.\n` +
-  `b. The day started off perfectly, with bright sunshine and everyone excited to have fun.\n` +
-  `c. It felt like we were waiting forever, but finally, the roller coaster started up again, and we had a blast!`;
-
 const deMau03: Exam = {
   id: 'de-mau-03',
   title: 'Đề Mẫu Số 3',
   year: '2024',
-  school: 'Trường THCS Trưng Vương',
+  school: 'Trường THCS Khương Đình - Đề 21',
   description: 'Fill in the Blank · Sentence Ordering · Rewriting',
   totalQuestions: 8,
 
@@ -250,7 +231,7 @@ questions: [
     options: ['about', 'with', 'of', 'for'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. about** — collocation: excited about something.\n\n❌ **B/C/D** — không đi với "excited" trong trường hợp này.\n\n💡 be excited about = háo hức về điều gì.',
+      '📘 Dịch câu: "Bọn trẻ rất háo hức về chuyến đi của trường."\n\n✅ **A. about** — collocation đúng là "excited about something" (háo hức về điều gì).\n\n❌ **B. with** — không dùng với "excited" trong trường hợp này.\n❌ **C. of** — sai giới từ.\n❌ **D. for** — không tự nhiên trong cấu trúc này.\n\n💡 Common phrase: be excited about = háo hức về điều gì.',
   },
 
   {
@@ -262,7 +243,7 @@ questions: [
     options: ['stay', 'stayed', 'will stay', 'are staying'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. will stay** — câu điều kiện loại 1: If + hiện tại đơn, will + V.\n\n❌ **A/B/D** — sai thì.\n\n💡 If + present simple → will + infinitive.',
+      '📘 Dịch câu: "Nếu ngày mai trời mưa, chúng tôi sẽ ở nhà."\n\n✅ **C. will stay** — đây là câu điều kiện loại 1: If + hiện tại đơn → will + động từ nguyên mẫu.\n\n❌ **A. stay** — thiếu "will".\n❌ **B. stayed** — sai thì.\n❌ **D. are staying** — không phù hợp cấu trúc câu điều kiện.\n\n💡 Structure: If + present simple, S + will + V.',
   },
 
   {
@@ -274,7 +255,7 @@ questions: [
     options: ['take off', 'put off', 'look up', 'set up'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. take off** — cởi bỏ.\n\n❌ **B. put off** — trì hoãn\n❌ **C. look up** — tra cứu\n❌ **D. set up** — thành lập\n\n💡 take off clothes/shoes/glasses.',
+      '📘 Dịch câu: "Hãy cởi giày trước khi vào nhà."\n\n✅ **A. take off** — nghĩa là cởi bỏ quần áo, giày dép.\n\n❌ **B. put off** — trì hoãn.\n❌ **C. look up** — tra cứu.\n❌ **D. set up** — thiết lập/thành lập.\n\n💡 Common phrases: take off shoes / coat / glasses.',
   },
 
   {
@@ -286,7 +267,7 @@ questions: [
     options: ['a', 'an', 'the', '(no article)'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. a** — "car" là danh từ đếm được số ít chưa xác định.\n\n❌ **B. an** — dùng trước nguyên âm\n❌ **C. the** — không xác định cụ thể chiếc xe nào\n❌ **D.** — danh từ số ít cần mạo từ\n\n💡 a/an + singular countable noun.',
+      '📘 Dịch câu: "Bố tôi đã mua một chiếc xe mới hôm qua."\n\n✅ **A. a** — "car" là danh từ đếm được số ít chưa xác định.\n\n❌ **B. an** — chỉ dùng trước âm nguyên âm.\n❌ **C. the** — dùng khi đã xác định cụ thể.\n❌ **D. (no article)** — danh từ số ít cần có mạo từ.\n\n💡 a/an + singular countable noun.',
   },
 
   {
@@ -298,7 +279,7 @@ questions: [
     options: ['completed', 'was completed', 'completes', 'is completing'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. was completed** — bị động quá khứ đơn.\n\n❌ **A/C/D** — sai cấu trúc bị động hoặc sai thì.\n\n💡 was/were + V3.',
+      '📘 Dịch câu: "Bài tập về nhà đã được học sinh hoàn thành tối qua."\n\n✅ **B. was completed** — câu bị động quá khứ đơn: was/were + V3.\n\n❌ **A. completed** — thiếu trợ động từ.\n❌ **C. completes** — chủ động hiện tại đơn.\n❌ **D. is completing** — hiện tại tiếp diễn.\n\n💡 Passive voice: S + was/were + V3.',
   },
 
   {
@@ -306,11 +287,16 @@ questions: [
     questionNumber: 6,
     type: 'writing',
     questionText:
-      'Choose the logical order:\n1. She studied very hard.\n2. She passed the exam.\n3. Her parents were proud of her.',
-    options: ['1-2-3', '2-1-3', '3-2-1', '1-3-2'],
+      'Arrange the words into a complete sentence:\nhard / she / studied / the exam / passed / and',
+    options: [
+      'She studied hard and passed the exam.',
+      'She passed and studied hard the exam.',
+      'Studied she hard and passed the exam.',
+      'She hard studied and passed exam.',
+    ],
     correctAnswer: 0,
     explanation:
-      '✅ **A. 1-2-3** — học chăm → đỗ kỳ thi → bố mẹ tự hào.\n\n❌ **B/C/D** — không hợp logic.\n\n💡 Xác định nguyên nhân → kết quả → phản ứng.',
+      '📘 Dịch câu đúng: "Cô ấy học chăm chỉ và đã vượt qua kỳ thi."\n\n✅ **A. She studied hard and passed the exam.** — đúng trật tự từ và đúng ngữ pháp.\n\n❌ **B/C/D** — sai thứ tự từ hoặc thiếu thành phần ngữ pháp.\n\n💡 Trong câu tiếng Anh: Subject + Verb + Object.',
   },
 
   {
@@ -322,7 +308,7 @@ questions: [
     options: ['although', 'because', 'so', 'however'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. so** — diễn tả kết quả.\n\n❌ **A. although** — tương phản\n❌ **B. because** — nguyên nhân\n❌ **D. however** — cần dấu câu khác\n\n💡 so = vì vậy.',
+      '📘 Dịch câu: "Anh ấy đói nên anh ấy đã ăn một chiếc bánh sandwich."\n\n✅ **C. so** — dùng để diễn tả kết quả.\n\n❌ **A. although** — diễn tả tương phản.\n❌ **B. because** — diễn tả nguyên nhân.\n❌ **D. however** — cần cấu trúc dấu câu khác.\n\n💡 so = vì vậy.',
   },
 
   {
@@ -334,7 +320,7 @@ questions: [
     options: ['read', 'reading', 'to read', 'reads'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. reading** — enjoy + V-ing.\n\n❌ **A/C/D** — sai cấu trúc.\n\n💡 enjoy doing something.',
+      '📘 Dịch câu: "Cô ấy thích đọc sách vào thời gian rảnh."\n\n✅ **B. reading** — sau "enjoy" dùng V-ing.\n\n❌ **A/C/D** — sai cấu trúc ngữ pháp.\n\n💡 enjoy + V-ing.',
   },
 
   {
@@ -346,7 +332,7 @@ questions: [
     options: ['well-known', 'quiet', 'boring', 'difficult'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. well-known** — famous = nổi tiếng.\n\n❌ **B/C/D** — không cùng nghĩa.\n\n💡 famous = well-known = popular.',
+      '📘 Dịch câu hỏi: "Chọn từ gần nghĩa nhất với famous."\n\n✅ **A. well-known** — famous nghĩa là nổi tiếng.\n\n❌ **B. quiet** — yên tĩnh.\n❌ **C. boring** — nhàm chán.\n❌ **D. difficult** — khó.\n\n💡 famous = well-known = nổi tiếng.',
   },
 
   {
@@ -358,7 +344,7 @@ questions: [
     options: ['on', 'in', 'at', 'for'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. in** — collocation: interested in.\n\n❌ **A/C/D** — sai giới từ.\n\n💡 be interested in + noun/V-ing.',
+      '📘 Dịch câu: "Mẹ tôi thích nấu ăn."\n\n✅ **B. in** — collocation đúng là "interested in".\n\n❌ **A/C/D** — sai giới từ.\n\n💡 be interested in + noun/V-ing.',
   },
 
   {
@@ -370,7 +356,7 @@ questions: [
     options: ['is', 'are', 'was', 'be'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. are** — "many students" là số nhiều.\n\n❌ **A/C/D** — sai hòa hợp chủ ngữ - động từ.\n\n💡 there is + singular | there are + plural.',
+      '📘 Dịch câu: "Hiện có nhiều học sinh trong lớp học."\n\n✅ **B. are** — "many students" là danh từ số nhiều.\n\n❌ **A. is** — dùng cho số ít.\n❌ **C. was** — quá khứ.\n❌ **D. be** — nguyên mẫu.\n\n💡 there is + singular noun | there are + plural noun.',
   },
 
   {
@@ -387,7 +373,7 @@ questions: [
     ],
     correctAnswer: 0,
     explanation:
-      '✅ **A.** — hợp logic nguyên nhân → kết quả.\n\n❌ **B/C/D** — không liên quan trực tiếp.\n\n💡 Dạng chọn câu kết thúc cần chú ý mạch logic.',
+      '📘 Dịch câu: "Chúng tôi bị lỡ xe buýt sáng nay. _____"\n\n✅ **A. As a result, we arrived late for school.** — phù hợp logic nguyên nhân → kết quả.\n\n❌ **B/C/D** — không liên quan trực tiếp đến việc lỡ xe buýt.\n\n💡 as a result = kết quả là.',
   },
 
   {
@@ -399,7 +385,7 @@ questions: [
     options: ['difficult', 'more difficult', 'most difficult', 'as difficult'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. more difficult** — comparative with "than".\n\n❌ **A/C/D** — sai cấu trúc so sánh.\n\n💡 more + long adjective + than.',
+      '📘 Dịch câu: "Bài tập này khó hơn bài trước."\n\n✅ **B. more difficult** — cấu trúc so sánh hơn với tính từ dài.\n\n❌ **A. difficult** — thiếu dạng so sánh.\n❌ **C. most difficult** — so sánh nhất.\n❌ **D. as difficult** — so sánh bằng.\n\n💡 more + adjective + than.',
   },
 
   {
@@ -411,7 +397,7 @@ questions: [
     options: ['sufficient', 'expensive', 'dangerous', 'crowded'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. sufficient** — adequate = đủ.\n\n❌ **B/C/D** — sai nghĩa.\n\n💡 adequate transportation = giao thông đầy đủ.',
+      '📘 Dịch câu hỏi: "Chọn nghĩa đúng của từ adequate."\n\n✅ **A. sufficient** — adequate nghĩa là đủ, đầy đủ.\n\n❌ **B/C/D** — sai nghĩa.\n\n💡 adequate = enough = sufficient.',
   },
 
   {
@@ -423,7 +409,7 @@ questions: [
     options: ['play', 'were playing', 'played', 'are playing'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. were playing** — hành động đang diễn ra thì có hành động khác xen vào.\n\n❌ **A/C/D** — sai thì.\n\n💡 Past continuous + past simple.',
+      '📘 Dịch câu: "Họ đang chơi bóng đá thì trời bắt đầu mưa."\n\n✅ **B. were playing** — hành động đang diễn ra trong quá khứ thì có hành động khác xen vào.\n\n❌ **A/C/D** — sai thì.\n\n💡 Past continuous + past simple.',
   },
 
   {
@@ -435,7 +421,7 @@ questions: [
     options: ['although', 'if', 'because', 'unless'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. if** — diễn tả điều kiện.\n\n❌ **A/C/D** — không phù hợp nghĩa.\n\n💡 if = nếu.',
+      '📘 Dịch câu: "Bạn nên học chăm hơn nếu muốn đỗ kỳ thi."\n\n✅ **B. if** — diễn tả điều kiện.\n\n❌ **A. although** — mặc dù.\n❌ **C. because** — bởi vì.\n❌ **D. unless** — trừ khi.\n\n💡 if = nếu.',
   },
 
   {
@@ -447,7 +433,7 @@ questions: [
     options: ['affordable', 'low-cost', 'expensive', 'valuable'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. expensive** — expensive ↔ cheap.\n\n❌ **A/B** — gần nghĩa với cheap\n❌ **D. valuable** — có giá trị, không phải trái nghĩa trực tiếp\n\n💡 cheap ↔ expensive.',
+      '📘 Dịch câu hỏi: "Chọn từ trái nghĩa với cheap."\n\n✅ **C. expensive** — cheap ↔ expensive.\n\n❌ **A/B** — gần nghĩa với cheap.\n❌ **D. valuable** — có giá trị, không phải trái nghĩa trực tiếp.\n\n💡 cheap = rẻ | expensive = đắt.',
   },
 
   {
@@ -455,11 +441,16 @@ questions: [
     questionNumber: 18,
     type: 'writing',
     questionText:
-      'Choose the logical order:\n1. We checked into the hotel.\n2. We arrived at the airport.\n3. We took a taxi to the city centre.',
-    options: ['2-3-1', '1-2-3', '3-2-1', '2-1-3'],
+      'Arrange the words into a complete sentence:\narrived / airport / we / at / the / early',
+    options: [
+      'We arrived at the airport early.',
+      'We early arrived at the airport.',
+      'Arrived we at the airport early.',
+      'We arrived early the airport at.',
+    ],
     correctAnswer: 0,
     explanation:
-      '✅ **A. 2-3-1** — đến sân bay → đi taxi → nhận phòng khách sạn.\n\n❌ **B/C/D** — không đúng trình tự thực tế.\n\n💡 Dạng ordering thường dựa trên chuỗi hành động tự nhiên.',
+      '📘 Dịch câu đúng: "Chúng tôi đến sân bay sớm."\n\n✅ **A. We arrived at the airport early.** — đúng trật tự từ và đúng ngữ pháp.\n\n❌ **B/C/D** — sai vị trí trạng từ hoặc sai trật tự câu.\n\n💡 Trạng từ chỉ thời gian thường đứng cuối câu.',
   },
 
   {
@@ -476,7 +467,7 @@ questions: [
     ],
     correctAnswer: 0,
     explanation:
-      '✅ **A. You are welcome.** — đáp lại lời cảm ơn.\n\n❌ **B/C/D** — không phù hợp ngữ cảnh.\n\n💡 Other responses: My pleasure / No problem.',
+      '📘 Dịch câu: "Cảm ơn bạn đã giúp tôi."\n\n✅ **A. You are welcome.** — cách đáp lại lời cảm ơn phù hợp.\n\n❌ **B/C/D** — không phù hợp ngữ cảnh giao tiếp.\n\n💡 Other responses: My pleasure / No problem.',
   },
 
   {
@@ -488,7 +479,7 @@ questions: [
     options: ['crowded', 'peaceful', 'empty', 'silent'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. crowded** — đông đúc hơn.\n\n❌ **B/C/D** — trái nghĩa hoặc không phù hợp ngữ cảnh.\n\n💡 crowded city = thành phố đông đúc.',
+      '📘 Dịch câu: "Thành phố đang trở nên đông đúc hơn vì nhiều người chuyển đến đó."\n\n✅ **A. crowded** — phù hợp với ngữ cảnh nhiều người chuyển tới.\n\n❌ **B. peaceful** — yên bình.\n❌ **C. empty** — trống vắng.\n❌ **D. silent** — im lặng.\n\n💡 crowded city = thành phố đông đúc.',
   },
 ]
 };

@@ -177,6 +177,22 @@ export default function VocabularyPractice({ exam }: Props) {
 
     return (
       <div className="animate-bounce-in">
+        {/* Thông tin đề thi */}
+        <div className="bg-white rounded-2xl px-4 py-3 shadow-sm border border-gray-100 mb-3 flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center text-white text-lg shadow-sm shrink-0">
+            🔤
+          </div>
+          <div className="text-left min-w-0">
+            <p className="font-bold text-gray-800 text-base leading-tight truncate">{exam.title}</p>
+            <p className="text-xs text-gray-400 mt-0.5">
+              {[exam.school, exam.year].filter(Boolean).join(' · ')}
+            </p>
+          </div>
+          <span className="ml-auto text-xs bg-green-100 text-green-700 font-semibold px-2.5 py-1 rounded-lg shrink-0">
+            🔤 Từ vựng
+          </span>
+        </div>
+
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center mb-4">
           <div className="text-6xl mb-3">
             {percentage >= 80 ? '🏆' : percentage >= 60 ? '🌟' : '💪'}

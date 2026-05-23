@@ -4,7 +4,7 @@ const deMau02: Exam = {
   id: 'de-mau-02',
   title: 'Đề Mẫu Số 2',
   year: '2024',
-  school: 'Trường THCS Lê Lợi',
+  school: 'Trường THCS Khương Đình - Đề 21',
   description: 'Reading Comprehension — Đề thử ngắn',
   totalQuestions: 0,
 
@@ -222,7 +222,7 @@ questions: [
     options: ['nation', 'national', 'nationally', 'nationality'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. national** — cần tính từ để bổ nghĩa cho danh từ "language".\n\n❌ **A. nation** — danh từ, không đứng trước "language" theo cách này\n❌ **C. nationally** — trạng từ, không bổ nghĩa cho danh từ\n❌ **D. nationality** — danh từ nghĩa là quốc tịch\n\n💡 adjective + noun: national language, international school, historical place.',
+      '📘 Dịch câu:\n"Ngôn ngữ quốc gia của Nhật Bản là tiếng Nhật."\n\n✅ **B. national** — cần tính từ để bổ nghĩa cho danh từ "language".\n\n❌ **A. nation** = quốc gia → danh từ\n❌ **C. nationally** = trên phạm vi quốc gia → trạng từ\n❌ **D. nationality** = quốc tịch → danh từ\n\n💡 Cấu trúc:\nadjective + noun\nVí dụ:\n- national language\n- international school',
   },
 
   {
@@ -234,7 +234,7 @@ questions: [
     options: ['Although', 'Because', 'Despite', 'So'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. Although** — nối hai mệnh đề trái nghĩa.\n\n❌ **B. Because** — diễn tả nguyên nhân, không phải tương phản\n❌ **C. Despite** — phải đi với noun/V-ing, không đi với clause đầy đủ\n❌ **D. So** — diễn tả kết quả\n\n💡 although + clause | despite + noun/V-ing.',
+      '📘 Dịch câu:\n"Mặc dù rất kiệt sức, anh ấy vẫn tiếp tục làm việc."\n\n✅ **A. Although** — dùng để nối hai mệnh đề mang ý tương phản.\n\n❌ **B. Because** = bởi vì → diễn tả nguyên nhân\n❌ **C. Despite** — phải đi với noun/V-ing\n❌ **D. So** = vì vậy → diễn tả kết quả\n\n💡 Cấu trúc:\n- although + clause\n- despite + noun/V-ing',
   },
 
   {
@@ -246,7 +246,7 @@ questions: [
     options: ['built', 'was built', 'is building', 'builds'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. was built** — bị động quá khứ đơn: was/were + V3.\n\n❌ **A. built** — thiếu trợ động từ\n❌ **C. is building** — chủ động hiện tại tiếp diễn\n❌ **D. builds** — hiện tại đơn chủ động\n\n💡 Passive voice dùng khi chủ thể nhận hành động.',
+      '📘 Dịch câu:\n"Con đường đã được xây vào năm ngoái."\n\n✅ **B. was built** — bị động quá khứ đơn.\n\n❌ **A. built** — thiếu trợ động từ\n❌ **C. is building** — chủ động hiện tại tiếp diễn\n❌ **D. builds** — hiện tại đơn chủ động\n\n💡 Công thức bị động:\nwas/were + V3',
   },
 
   {
@@ -258,7 +258,7 @@ questions: [
     options: ['ran out of', 'looked up', 'put off', 'took off'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. ran out of** — hết, cạn kiệt.\n\n❌ **B. looked up** — tra cứu\n❌ **C. put off** — trì hoãn\n❌ **D. took off** — cất cánh / cởi bỏ\n\n💡 run out of + money/time/water/food.',
+      '📘 Dịch câu:\n"Chúng tôi đã hết đường nên cần mua thêm."\n\n✅ **A. ran out of** = hết, cạn kiệt.\n\n❌ **B. looked up** = tra cứu\n❌ **C. put off** = trì hoãn\n❌ **D. took off** = cất cánh / cởi ra\n\n💡 Cụm cần nhớ:\n- run out of money\n- run out of food',
   },
 
   {
@@ -270,7 +270,7 @@ questions: [
     options: ['of', 'about', 'at', 'with'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. at** — collocation: good at something.\n\n❌ **A/B/D** — sai giới từ đi kèm.\n\n💡 good at sports / math / languages.',
+      '📘 Dịch câu:\n"Cô ấy rất giỏi tiếng Anh."\n\n✅ **C. at** — collocation đúng là "good at".\n\n❌ **A/B/D** — sai giới từ đi kèm.\n\n💡 Cấu trúc:\nbe good at + noun/V-ing',
   },
 
   {
@@ -282,7 +282,7 @@ questions: [
     options: ['speak', 'to speak', 'speaking', 'spoke'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. speaking** — sau "practise" dùng V-ing.\n\n❌ **A/B/D** — sai cấu trúc ngữ pháp.\n\n💡 practise + V-ing.',
+      '📘 Dịch câu:\n"Các học sinh luyện nói tiếng Anh mỗi tối."\n\n✅ **C. speaking** — sau "practise" dùng V-ing.\n\n❌ **A/B/D** — sai cấu trúc ngữ pháp.\n\n💡 Cấu trúc:\npractise + V-ing',
   },
 
   {
@@ -290,11 +290,16 @@ questions: [
     questionNumber: 7,
     type: 'writing',
     questionText:
-      'Choose the correct order:\n1. We finally reached the top of the mountain.\n2. We started climbing early in the morning.\n3. Everyone felt tired but excited.',
-    options: ['2-1-3', '1-2-3', '3-2-1', '2-3-1'],
+      'Choose the correct sentence from the given words:\n/finished / she / before / had / homework / dinner / her / .',
+    options: [
+      'She had finished her homework before dinner.',
+      'She finished had her homework before dinner.',
+      'Before dinner she homework had finished.',
+      'She had her homework finished before dinner.',
+    ],
     correctAnswer: 0,
     explanation:
-      '✅ **A. 2-1-3** — bắt đầu leo núi → đến đỉnh → cảm xúc cuối cùng.\n\n❌ **B/C/D** — không đúng logic thời gian.\n\n💡 Hãy tìm trình tự thời gian khi làm dạng sắp xếp câu.',
+      '📘 Dịch câu:\n"Cô ấy đã hoàn thành bài tập về nhà trước bữa tối."\n\n✅ **A.** — đúng trật tự từ và đúng thì quá khứ hoàn thành.\n\n❌ **B/C/D** — sai trật tự từ hoặc sai cấu trúc ngữ pháp.\n\n💡 Cấu trúc:\n- had + V3\n- had finished',
   },
 
   {
@@ -306,7 +311,7 @@ questions: [
     options: ['a', 'an', 'the', '(no article)'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. the** — cụm cố định: in the evening.\n\n❌ **A/B/D** — không dùng trong time expressions này.\n\n💡 in the morning / afternoon / evening.',
+      '📘 Dịch câu:\n"Cô ấy thường học vào buổi tối."\n\n✅ **C. the** — cụm cố định: in the evening.\n\n❌ **A/B/D** — không dùng trong cụm thời gian này.\n\n💡 Cụm cần nhớ:\n- in the morning\n- in the afternoon\n- in the evening',
   },
 
   {
@@ -318,7 +323,7 @@ questions: [
     options: ['go', 'to go', 'going', 'went'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. going** — suggest + V-ing.\n\n❌ **A/B/D** — sai cấu trúc.\n\n💡 suggest doing something.',
+      '📘 Dịch câu:\n"Anh ấy đề nghị đi xem phim."\n\n✅ **C. going** — sau "suggest" dùng V-ing.\n\n❌ **A/B/D** — sai cấu trúc.\n\n💡 Cấu trúc:\nsuggest + V-ing',
   },
 
   {
@@ -330,7 +335,7 @@ questions: [
     options: ['empty', 'busy', 'peaceful', 'quiet'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. busy** — crowded = đông đúc.\n\n❌ **A. empty** — trái nghĩa\n❌ **C/D** — mang nghĩa yên bình/yên tĩnh\n\n💡 crowded city = busy city.',
+      `📘 Dịch câu:\n"Chọn từ gần nghĩa nhất với 'crowded'."\n\n✅ **B. busy** — crowded = đông đúc.\n\n❌ **A. empty** = trống rỗng → trái nghĩa\n❌ **C. peaceful** = yên bình\n❌ **D. quiet** = yên tĩnh\n\n💡 Ví dụ:\n- crowded city\n- busy street`,
   },
 
   {
@@ -342,7 +347,7 @@ questions: [
     options: ['although', 'because', 'however', 'despite'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. because** — diễn tả nguyên nhân.\n\n❌ **A. although** — diễn tả tương phản\n❌ **C. however** — cần tách mệnh đề\n❌ **D. despite** — đi với noun/V-ing\n\n💡 because + clause.',
+      '📘 Dịch câu:\n"Cô ấy ở nhà vì trời mưa rất to."\n\n✅ **B. because** — dùng để diễn tả nguyên nhân.\n\n❌ **A. although** — diễn tả tương phản\n❌ **C. however** — cần tách thành câu khác\n❌ **D. despite** — đi với noun/V-ing\n\n💡 Cấu trúc:\nbecause + clause',
   },
 
   {
@@ -354,7 +359,7 @@ questions: [
     options: ['build', 'are building', 'built', 'were building'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. are building** — "at the moment" → hiện tại tiếp diễn.\n\n❌ **A/C/D** — sai thì.\n\n💡 Dấu hiệu hiện tại tiếp diễn: now, at the moment, currently.',
+      '📘 Dịch câu:\n"Các công nhân đang xây cây cầu vào lúc này."\n\n✅ **B. are building** — "at the moment" là dấu hiệu của hiện tại tiếp diễn.\n\n❌ **A/C/D** — sai thì.\n\n💡 Dấu hiệu hiện tại tiếp diễn:\n- now\n- at the moment\n- currently',
   },
 
   {
@@ -371,7 +376,7 @@ questions: [
     ],
     correctAnswer: 0,
     explanation:
-      '✅ **A.** — phù hợp với ý tương phản của câu đầu.\n\n❌ **B/C/D** — không liên kết logic với mạch văn.\n\n💡 however = tuy nhiên, diễn tả sự trái ngược.',
+      '📘 Dịch câu:\n"Thời tiết rất tệ trong chuyến đi của chúng tôi. ..."\n\n✅ **A.** — phù hợp với ý tương phản của câu trước.\n\n❌ **B/C/D** — không liên kết logic với mạch văn.\n\n💡 however = tuy nhiên',
   },
 
   {
@@ -380,10 +385,15 @@ questions: [
     type: 'grammar',
     questionText:
       'Choose the correct comparative structure:\nThis book is _____ that one.',
-    options: ['as interesting as', 'more interesting as', 'as interesting', 'interesting than'],
+    options: [
+      'as interesting as',
+      'more interesting as',
+      'as interesting',
+      'interesting than',
+    ],
     correctAnswer: 0,
     explanation:
-      '✅ **A. as interesting as** — cấu trúc so sánh bằng.\n\n❌ **B/C/D** — sai cấu trúc chuẩn.\n\n💡 as + adjective + as.',
+      '📘 Dịch câu:\n"Cuốn sách này thú vị bằng cuốn kia."\n\n✅ **A. as interesting as** — cấu trúc so sánh bằng.\n\n❌ **B/C/D** — sai cấu trúc chuẩn.\n\n💡 Công thức:\nas + adjective + as',
   },
 
   {
@@ -392,10 +402,15 @@ questions: [
     type: 'vocabulary',
     questionText:
       'Choose the correct meaning of "destination".',
-    options: ['starting point', 'final place to arrive', 'hotel room', 'travel ticket'],
+    options: [
+      'starting point',
+      'final place to arrive',
+      'hotel room',
+      'travel ticket',
+    ],
     correctAnswer: 1,
     explanation:
-      '✅ **B. final place to arrive** — destination = điểm đến.\n\n❌ **A/C/D** — sai nghĩa.\n\n💡 tourist destination = điểm du lịch.',
+      `📘 Dịch câu:\n"Chọn nghĩa đúng của từ 'destination'."\n\n✅ **B. final place to arrive** — destination = điểm đến.\n\n❌ **A/C/D** — sai nghĩa.\n\n💡 Cụm thường gặp:\n- tourist destination\n- holiday destination`,
   },
 
   {
@@ -407,7 +422,7 @@ questions: [
     options: ['because', 'although', 'but', 'so'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. but** — nối hai ý trái nghĩa.\n\n❌ **A. because** — nguyên nhân\n❌ **B. although** — cần cấu trúc khác\n❌ **D. so** — kết quả\n\n💡 but = nhưng.',
+      '📘 Dịch câu:\n"Họ đã mệt, nhưng họ vẫn tiếp tục leo núi."\n\n✅ **C. but** — nối hai ý trái nghĩa.\n\n❌ **A. because** — nguyên nhân\n❌ **B. although** — không phù hợp cấu trúc câu này\n❌ **D. so** — diễn tả kết quả\n\n💡 but = nhưng',
   },
 
   {
@@ -419,7 +434,7 @@ questions: [
     options: ['visit', 'visits', 'visited', 'visiting'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. visit** — chủ ngữ số nhiều → động từ nguyên mẫu.\n\n❌ **B. visits** — dùng cho chủ ngữ số ít\n❌ **C/D** — sai thì hoặc sai cấu trúc\n\n💡 Present simple describes habits/facts.',
+      '📘 Dịch câu:\n"Nhiều khách du lịch ghé thăm Hà Nội mỗi năm."\n\n✅ **A. visit** — chủ ngữ số nhiều nên dùng động từ nguyên mẫu.\n\n❌ **B. visits** — dùng cho chủ ngữ số ít\n❌ **C/D** — sai thì hoặc sai cấu trúc\n\n💡 Hiện tại đơn dùng cho:\n- sự thật\n- thói quen',
   },
 
   {
@@ -427,11 +442,16 @@ questions: [
     questionNumber: 18,
     type: 'writing',
     questionText:
-      'Choose the logical order:\n1. We bought tickets.\n2. We entered the amusement park.\n3. We rode the roller coaster.',
-    options: ['1-2-3', '2-1-3', '3-2-1', '2-3-1'],
+      'Choose the correct sentence from the given words:\n/park / yesterday / went / we / amusement / the / to / .',
+    options: [
+      'We went to the amusement park yesterday.',
+      'We yesterday went to the amusement park.',
+      'Went we to the amusement park yesterday.',
+      'We went yesterday the amusement park to.',
+    ],
     correctAnswer: 0,
     explanation:
-      '✅ **A. 1-2-3** — mua vé → vào công viên → chơi tàu lượn.\n\n❌ **B/C/D** — không hợp logic thực tế.\n\n💡 Dạng ordering thường theo hành động thực tế ngoài đời.',
+      '📘 Dịch câu:\n"Hôm qua chúng tôi đã đến công viên giải trí."\n\n✅ **A.** — đúng trật tự từ và đúng ngữ pháp.\n\n❌ **B/C/D** — sai vị trí trạng từ hoặc sai cấu trúc câu.\n\n💡 Trật tự thường gặp:\nSubject + Verb + Place + Time',
   },
 
   {
@@ -448,7 +468,7 @@ questions: [
     ],
     correctAnswer: 0,
     explanation:
-      '✅ **A. Yes, I would love some.** — câu trả lời lịch sự cho lời mời.\n\n❌ **B/C/D** — sai ngữ pháp hoặc không phù hợp ngữ cảnh.\n\n💡 Would you like...? → Yes, please / I’d love to.',
+      '📘 Dịch câu:\n"Bạn có muốn uống một ít cà phê không?"\n\n✅ **A. Yes, I would love some.** — câu trả lời lịch sự cho lời mời.\n\n❌ **B/C/D** — sai ngữ pháp hoặc không phù hợp ngữ cảnh.\n\n💡 Cách trả lời:\n- Yes, please.\n- I’d love to.',
   },
 
   {
@@ -460,7 +480,7 @@ questions: [
     options: ['urban', 'village', 'mountainous', 'peaceful'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. urban** — rural ↔ urban.\n\n❌ **B/C/D** — không phải từ trái nghĩa trực tiếp.\n\n💡 rural = nông thôn | urban = thành thị.',
+      `📘 Dịch câu:\n"Chọn từ trái nghĩa với 'rural'."\n\n✅ **A. urban** — rural ↔ urban.\n\n❌ **B/C/D** — không phải từ trái nghĩa trực tiếp.\n\n💡 Nghĩa:\n- rural = nông thôn\n- urban = thành thị`,
   },
 ]
 };

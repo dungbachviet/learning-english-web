@@ -5,7 +5,7 @@ const deMau01: Exam = {
   id: 'de-mau-01',
   title: 'Đề Mẫu Số 1',
   year: '2024',
-  school: 'Trường THCS Nguyễn Du',
+  school: 'Trường THCS Trường THCS Khương Đình - Đề 21',
   description: 'Pronunciation · Stress · Grammar · Vocabulary',
   totalQuestions: 8,
 
@@ -221,10 +221,10 @@ questions: [
     type: 'grammar',
     questionText:
       'Choose the best word for the blank:\nLearn English in one of our three schools for the best experience at the lowest _____ .',
-    options: ['value', 'expectation', 'risks', 'costs'],
+    options: ['value', 'expectation', 'risks', 'cost'],
     correctAnswer: 3,
     explanation:
-      '✅ **D. costs** — "at the lowest costs" means với chi phí thấp nhất. Đây là cụm phù hợp về nghĩa trong quảng cáo khóa học.\n\n❌ **A. value** — "value" = giá trị, không dùng để nói giá tiền trực tiếp trong ngữ cảnh này\n❌ **B. expectation** — nghĩa là sự kỳ vọng, hoàn toàn sai nghĩa\n❌ **C. risks** — nghĩa là rủi ro, không liên quan đến học phí hay giá cả\n\n💡 Common collocations: low cost, reduce costs, living costs.',
+      '📘 Dịch câu:\n"Hãy học tiếng Anh tại một trong ba trường của chúng tôi để có trải nghiệm tốt nhất với chi phí thấp nhất."\n\n✅ **D. cost** — cụm đúng là "at the lowest cost" = với chi phí thấp nhất.\n\n❌ **A. value** = giá trị → không dùng để nói trực tiếp về tiền học\n❌ **B. expectation** = sự kỳ vọng → sai nghĩa hoàn toàn\n❌ **C. risks** = rủi ro → không liên quan đến chi phí\n\n💡 Cụm cần nhớ:\n- low cost\n- living cost\n- reduce costs',
   },
 
   {
@@ -236,7 +236,7 @@ questions: [
     options: ['meet', 'build', 'keep', 'make'],
     correctAnswer: 3,
     explanation:
-      '✅ **D. make** — "make friends" là collocation rất phổ biến, có nghĩa là "kết bạn". Đây là cách diễn đạt tự nhiên trong quảng cáo du học hoặc du lịch.\n\n❌ **A. meet** — "meet friends" nghĩa là gặp bạn bè đã quen, không phù hợp bằng "make friends" trong ngữ cảnh này.\n❌ **B. build** — "build friends" là sai collocation.\n❌ **C. keep** — "keep friends" nghĩa là duy trì tình bạn, không phù hợp ngữ cảnh.\n\n💡 Common phrase: **make friends** = kết bạn.',
+      '📘 Dịch câu:\n"Hãy luyện tiếng Anh, kết bạn và khám phá nước Anh!"\n\n✅ **D. make** — "make friends" là collocation rất phổ biến, nghĩa là "kết bạn".\n\n❌ **A. meet** — "meet friends" nghĩa là gặp bạn bè đã quen\n❌ **B. build** — "build friends" là sai collocation\n❌ **C. keep** — "keep friends" = duy trì tình bạn, không phù hợp ngữ cảnh\n\n💡 Cụm cần nhớ:\n- make friends\n- meet new people',
   },
 
   {
@@ -244,11 +244,11 @@ questions: [
     questionNumber: 3,
     type: 'grammar',
     questionText:
-      'Choose the correct connector:\nPart-time course: mornings, afternoons _____ evenings.',
-    options: ['and', 'or', 'except', 'include'],
+      'Choose the correct connector:\nPart-time courses are available in the mornings, afternoons _____ evenings.',
+    options: ['and', 'or', 'except', 'including'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. or** — "mornings, afternoons or evenings" nghĩa là học vào buổi sáng, chiều hoặc tối.\n\n❌ **A. and** — dùng "and" sẽ khiến nghĩa trở thành học tất cả các buổi\n❌ **C. except** — nghĩa là ngoại trừ, sai logic\n❌ **D. include** — là động từ, không thể nối các lựa chọn trong cấu trúc này\n\n💡 "or" thường dùng khi đưa ra lựa chọn.',
+      '📘 Dịch câu:\n"Các khóa học bán thời gian có vào buổi sáng, buổi chiều hoặc buổi tối."\n\n✅ **B. or** — dùng để đưa ra lựa chọn.\n\n❌ **A. and** — nghĩa là tất cả các buổi\n❌ **C. except** = ngoại trừ → sai nghĩa\n❌ **D. including** = bao gồm → không phù hợp cấu trúc\n\n💡 Cụm thường gặp:\n- tea or coffee\n- mornings or evenings',
   },
 
   {
@@ -260,7 +260,7 @@ questions: [
     options: ['in', 'on', 'at', 'with'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. on** — collocation đúng là "focus on something".\n\n❌ **A. in** — không đi với "focus"\n❌ **C. at** — sai collocation\n❌ **D. with** — không dùng trong cấu trúc này\n\n💡 Remember: focus on studies / focus on grammar / concentrate on work.',
+      '📘 Dịch câu:\n"Tập trung thêm vào ngữ pháp và từ vựng."\n\n✅ **B. on** — collocation đúng là "focus on something".\n\n❌ **A. in** — không đi với "focus"\n❌ **C. at** — sai collocation\n❌ **D. with** — không dùng trong cấu trúc này\n\n💡 Cấu trúc cần nhớ:\n- focus on studies\n- focus on grammar',
   },
 
   {
@@ -272,7 +272,7 @@ questions: [
     options: ['consider', 'is considered', 'are considered', 'is considering'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. is considered** — đây là câu bị động ở hiện tại đơn: "is considered to be..."\n\n❌ **A. consider** — thiếu chủ ngữ thực hiện hành động\n❌ **C. are considered** — sai vì chủ ngữ "industry" là số ít\n❌ **D. is considering** — hiện tại tiếp diễn, sai nghĩa\n\n💡 Passive voice: S + am/is/are + V3.',
+      '📘 Dịch câu:\n"Ngành du lịch được xem là ngành công nghiệp lớn nhất thế giới."\n\n✅ **B. is considered** — đây là câu bị động ở hiện tại đơn.\n\n❌ **A. consider** — sai ngữ pháp\n❌ **C. are considered** — chủ ngữ số ít nên không dùng "are"\n❌ **D. is considering** — sai thì và sai nghĩa\n\n💡 Công thức bị động:\nS + am/is/are + V3',
   },
 
   {
@@ -284,7 +284,7 @@ questions: [
     options: ['reached', 'came', 'went', 'experienced'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. reached** — "reach + number" là collocation rất phổ biến.\n\n❌ **B. came** — không dùng với số liệu theo cách này\n❌ **C. went** — cần thêm giới từ "up/down"\n❌ **D. experienced** — không phù hợp với chủ ngữ là "number"\n\n💡 Common structure: population reached..., sales reached..., temperature reached...',
+      '📘 Dịch câu:\n"Số lượng khách du lịch trên toàn thế giới đã đạt 1,04 tỷ vào năm 2012."\n\n✅ **A. reached** — collocation đúng là "reach a number".\n\n❌ **B. came** — không dùng với số liệu kiểu này\n❌ **C. went** — cần thêm up/down\n❌ **D. experienced** — không phù hợp với chủ ngữ\n\n💡 Cụm thường gặp:\n- sales reached...\n- population reached...',
   },
 
   {
@@ -296,7 +296,7 @@ questions: [
     options: ['tours', 'touristic', 'tourism', 'tourists'],
     correctAnswer: 3,
     explanation:
-      '✅ **D. tourists** — "large numbers of + plural noun".\n\n❌ **A. tours** — tour = chuyến du lịch, không phải người\n❌ **B. touristic** — tính từ, không dùng sau "numbers of"\n❌ **C. tourism** — danh từ không đếm được\n\n💡 "a number of + plural noun + plural verb".',
+      '📘 Dịch câu:\n"Số lượng lớn khách du lịch như vậy đang bắt đầu gây ra vấn đề."\n\n✅ **D. tourists** — sau "large numbers of" cần danh từ số nhiều.\n\n❌ **A. tours** = các chuyến du lịch\n❌ **B. touristic** = tính từ\n❌ **C. tourism** = danh từ không đếm được\n\n💡 Cấu trúc cần nhớ:\n- a number of + plural noun',
   },
 
   {
@@ -308,7 +308,7 @@ questions: [
     options: ['destroy', 'will destroy', 'are destroying', 'destroyed'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. are destroying** — hiện tại tiếp diễn diễn tả vấn đề đang xảy ra.\n\n❌ **A. destroy** — hiện tại đơn không nhấn mạnh tính đang diễn ra\n❌ **B. will destroy** — tương lai, sai ngữ cảnh\n❌ **D. destroyed** — quá khứ đơn, sai thời gian\n\n💡 Present continuous often describes current trends/problems.',
+      '📘 Dịch câu:\n"Hàng nghìn người trượt tuyết đang phá hủy những ngọn núi mà họ đến để tận hưởng."\n\n✅ **C. are destroying** — hiện tại tiếp diễn diễn tả vấn đề đang xảy ra.\n\n❌ **A. destroy** — không nhấn mạnh tính đang diễn ra\n❌ **B. will destroy** — sai thì\n❌ **D. destroyed** — quá khứ đơn\n\n💡 Hiện tại tiếp diễn thường dùng cho xu hướng/vấn đề hiện tại.',
   },
 
   {
@@ -320,7 +320,7 @@ questions: [
     options: ['ask', 'to ask', 'asked', 'asking'],
     correctAnswer: 3,
     explanation:
-      '✅ **D. asking** — sau giới từ "by" dùng V-ing.\n\n❌ **A. ask** — động từ nguyên mẫu, sai cấu trúc\n❌ **B. to ask** — infinitive không dùng sau "by"\n❌ **C. asked** — quá khứ phân từ, sai ngữ pháp\n\n💡 Structure: by + V-ing.',
+      '📘 Dịch câu:\n"Bạn có thể trở thành một khách du lịch có trách nhiệm bằng cách hỏi đại lý du lịch những câu hỏi phù hợp."\n\n✅ **D. asking** — sau giới từ "by" dùng V-ing.\n\n❌ **A. ask** — sai cấu trúc\n❌ **B. to ask** — không dùng sau "by"\n❌ **C. asked** — sai ngữ pháp\n\n💡 Công thức:\nby + V-ing',
   },
 
   {
@@ -332,7 +332,7 @@ questions: [
     options: ['got out of', 'ran out of', 'grew out of', 'made out of'],
     correctAnswer: 1,
     explanation:
-      '✅ **B. ran out of** = cạn kiệt thứ gì.\n\n❌ **A. got out of** — thoát khỏi\n❌ **C. grew out of** — không còn thích/thói quen nữa\n❌ **D. made out of** — làm từ chất liệu gì\n\n💡 run out of money / water / food / time.',
+      '📘 Dịch câu:\n"Dân làng sẽ sớm chết vì họ đã cạn nước sạch."\n\n✅ **B. ran out of** = cạn kiệt thứ gì.\n\n❌ **A. got out of** = thoát khỏi\n❌ **C. grew out of** = không còn thích nữa\n❌ **D. made out of** = làm từ chất liệu gì\n\n💡 Cụm thường gặp:\n- run out of money\n- run out of food',
   },
 
   {
@@ -340,11 +340,16 @@ questions: [
     questionNumber: 11,
     type: 'writing',
     questionText:
-      'Choose the correct order of the sentences:\n1. The day started off perfectly.\n2. The roller coaster broke down unexpectedly.\n3. Finally, the roller coaster started up again.',
-    options: ['1-3-2', '2-3-1', '3-1-2', '1-2-3'],
-    correctAnswer: 3,
+      'Choose the correct sentence from the given words:\n/day / despite / rainy / went / they / picnic / the / on / a / .',
+    options: [
+      'They went on a picnic despite the rainy day.',
+      'They despite went on a picnic the rainy day.',
+      'Despite they went on a picnic the rainy day.',
+      'They went despite on a rainy picnic day.',
+    ],
+    correctAnswer: 0,
     explanation:
-      '✅ **D. 1-2-3** — logic tự nhiên: bắt đầu vui vẻ → gặp sự cố → cuối cùng hoạt động lại.\n\n❌ **A/B/C** — các đáp án này khiến trình tự sự việc không hợp lý về thời gian.\n\n💡 Với dạng sắp xếp câu, hãy tìm: mở đầu → vấn đề → kết quả.',
+      '📘 Dịch câu:\n"Họ đã đi dã ngoại mặc dù trời mưa."\n\n✅ **A.** — đúng trật tự từ và đúng ngữ pháp.\n\n❌ **B/C/D** — sai vị trí của "despite" và sai trật tự câu.\n\n💡 Cấu trúc cần nhớ:\n- despite + noun/noun phrase\n- despite the rain',
   },
 
   {
@@ -361,7 +366,7 @@ questions: [
     ],
     correctAnswer: 0,
     explanation:
-      '✅ **A.** — phù hợp với ý nghĩa tích cực của cụm "In spite of".\n\n❌ **B/C/D** — mang nghĩa tiêu cực, không phù hợp với mạch văn.\n\n💡 "In spite of" thường dẫn đến kết quả trái mong đợi.',
+      '📘 Dịch câu:\n"Mặc dù có sự trì hoãn bất ngờ, ..."\n\n✅ **A.** — phù hợp với ý nghĩa tích cực của "in spite of".\n\n❌ **B/C/D** — mang nghĩa tiêu cực, không phù hợp ngữ cảnh.\n\n💡 Cấu trúc cần nhớ:\n- in spite of = despite',
   },
 
   {
@@ -378,7 +383,7 @@ questions: [
     ],
     correctAnswer: 1,
     explanation:
-      '✅ **B. he wears his glasses** — "unless" = if not.\n\n❌ **A.** double negative → sai nghĩa\n❌ **C.** sai thì\n❌ **D.** sai ngữ pháp\n\n💡 unless = if ... not.',
+      '📘 Dịch câu:\n"Anh ấy không thể nhìn rõ nếu không đeo kính."\n\n✅ **B. he wears his glasses** — "unless" = if ... not.\n\n❌ **A.** double negative → sai nghĩa\n❌ **C.** sai thì\n❌ **D.** sai ngữ pháp\n\n💡 Cấu trúc:\nunless = if not',
   },
 
   {
@@ -395,7 +400,7 @@ questions: [
     ],
     correctAnswer: 2,
     explanation:
-      '✅ **C. as high as** — cấu trúc so sánh bằng: as + adj + as.\n\n❌ **A.** không dùng "higher" trong cấu trúc này\n❌ **B.** thiếu "as"\n❌ **D.** sai hoàn toàn về cấu trúc\n\n💡 as + adjective + as.',
+      '📘 Dịch câu:\n"Không có ngọn núi nào ở bán đảo Đông Dương cao bằng Fansipan."\n\n✅ **C. as high as** — cấu trúc so sánh bằng.\n\n❌ **A.** không dùng "higher" trong cấu trúc này\n❌ **B.** thiếu "as"\n❌ **D.** sai cấu trúc\n\n💡 Công thức:\nas + adjective + as',
   },
 
   {
@@ -412,7 +417,7 @@ questions: [
     ],
     correctAnswer: 3,
     explanation:
-      '✅ **D. You are welcome.** — câu đáp lại lời cảm ơn phù hợp nhất.\n\n❌ **A/B/C** — không phù hợp ngữ cảnh giao tiếp.\n\n💡 Other responses: My pleasure / Not at all / No problem.',
+      '📘 Dịch câu:\n"Cảm ơn bạn rất nhiều vì bữa tiệc tuyệt vời."\n\n✅ **D. You are welcome.** — cách đáp lại lời cảm ơn phù hợp nhất.\n\n❌ **A/B/C** — không phù hợp ngữ cảnh giao tiếp.\n\n💡 Các cách đáp lời cảm ơn:\n- My pleasure\n- Not at all\n- No problem',
   },
 
   {
@@ -424,7 +429,7 @@ questions: [
     options: ['the', 'a', '(no article)', 'an'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. the** — fixed phrase: in the afternoon.\n\n❌ **B/C/D** — không dùng trong cụm cố định này.\n\n💡 in the morning / afternoon / evening.',
+      '📘 Dịch câu:\n"Máy bay của chúng tôi đến Hà Nội lúc 2 giờ chiều."\n\n✅ **A. the** — cụm cố định: in the afternoon.\n\n❌ **B/C/D** — không dùng trong cụm này.\n\n💡 Cụm thời gian:\n- in the morning\n- in the afternoon\n- in the evening',
   },
 
   {
@@ -436,7 +441,7 @@ questions: [
     options: ['of', 'about', 'at', 'with'],
     correctAnswer: 0,
     explanation:
-      '✅ **A. of** — collocation đúng: be fond of.\n\n❌ **B/C/D** — sai collocation.\n\n💡 be fond of + noun/V-ing.',
+      '📘 Dịch câu:\n"Em trai út của tôi rất thích ăn khoai tây chiên."\n\n✅ **A. of** — collocation đúng là "be fond of".\n\n❌ **B/C/D** — sai collocation.\n\n💡 Cấu trúc:\nbe fond of + noun/V-ing',
   },
 
   {
@@ -448,7 +453,7 @@ questions: [
     options: ['such', 'too', 'so', 'enough'],
     correctAnswer: 2,
     explanation:
-      '✅ **C. so** — cấu trúc: so + adjective + that.\n\n❌ **A. such** — phải là "such an interesting comic book"\n❌ **B. too** — mang nghĩa quá mức\n❌ **D. enough** — cấu trúc khác hoàn toàn\n\n💡 so + adj + that + clause.',
+      '📘 Dịch câu:\n"Cuốn truyện tranh này thú vị đến mức chúng tôi đã đọc nó hai lần."\n\n✅ **C. so** — cấu trúc đúng là "so + adjective + that".\n\n❌ **A. such** — phải là "such an interesting comic book"\n❌ **B. too** — nghĩa là quá mức\n❌ **D. enough** — sai cấu trúc\n\n💡 Công thức:\nso + adj + that + clause',
   },
 
   {
@@ -465,7 +470,7 @@ questions: [
     ],
     correctAnswer: 1,
     explanation:
-      '✅ **B.** — đúng nghĩa của "invite".\n\n❌ **A/C/D** — sai nghĩa hoàn toàn.\n\n💡 invite someone to + place/event.',
+      '📘 Dịch câu:\n"Paul mời Jenny đi ăn tối."\n\n✅ **B.** — diễn đạt đúng nghĩa của từ "invite".\n\n❌ **A/C/D** — sai nghĩa hoàn toàn.\n\n💡 Cấu trúc:\ninvite someone to + place/event',
   },
 
   {
@@ -473,11 +478,16 @@ questions: [
     questionNumber: 20,
     type: 'writing',
     questionText:
-      'Choose the best order to make a logical paragraph:\n1. People climbed the staircase.\n2. The stilt houses stood above the ground.\n3. The houses protected people from wild animals.',
-    options: ['2-3-1', '1-2-3', '3-2-1', '2-1-3'],
+      'Choose the correct sentence from the given words:\n/homework / before / had / finished / they / dinner / their / .',
+    options: [
+      'They had finished their homework before dinner.',
+      'They finished had their homework before dinner.',
+      'Before dinner they homework had finished their.',
+      'They had their homework finished before dinner.',
+    ],
     correctAnswer: 0,
     explanation:
-      '✅ **A. 2-3-1** — giới thiệu nhà sàn → tác dụng → cách đi vào nhà.\n\n❌ **B/C/D** — trình tự ý tưởng không tự nhiên.\n\n💡 Dạng paragraph ordering thường đi theo: description → function → detail.',
+      '📘 Dịch câu:\n"Họ đã hoàn thành bài tập về nhà trước bữa tối."\n\n✅ **A.** — đúng trật tự từ và đúng thì quá khứ hoàn thành.\n\n❌ **B/C/D** — sai trật tự từ hoặc sai cấu trúc ngữ pháp.\n\n💡 Cấu trúc cần nhớ:\n- had + V3\n- had finished',
   },
 ]
 };
