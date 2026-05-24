@@ -23,6 +23,10 @@ import deMau10 from './exams/de-mau-10';
 import deMau11 from './exams/de-mau-11';
 import deMau12 from './exams/de-mau-12';
 import deMau13 from './exams/de-mau-13';
+import deMau14 from './exams/de-mau-14';
+import deMau15 from './exams/de-mau-15';
+import deMau16 from './exams/de-mau-16';
+import deMau17 from './exams/de-mau-17';
 
 export const exams: Exam[] = [
   deMau01,
@@ -38,6 +42,10 @@ export const exams: Exam[] = [
   deMau11,
   deMau12,
   deMau13,
+  deMau14,
+  deMau15,
+  deMau16,
+  deMau17,
 ];
 
 export const getExamById = (id: string): Exam | undefined => {
