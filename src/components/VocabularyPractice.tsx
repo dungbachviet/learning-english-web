@@ -2,25 +2,14 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Exam } from '@/types';
-import { shuffleArray, createVocabMultipleChoice, calculatePercentage, getGrade } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { Exam, VocabQuestion } from '@/types';
+import { buildVocabQuestions, calculatePercentage, getGrade, cn } from '@/lib/utils';
 import { playCorrectSound, playIncorrectSound } from '@/lib/sound';
 
 interface Props {
   exam: Exam;
-}
-
-interface VocabQuestion {
-  wordId: string;
-  word: string;
-  pronunciation?: string;
-  partOfSpeech?: string;
-  definition: string;
-  exampleSentence: string;
-  exampleTranslation: string;
-  options: string[];
-  correctIndex: number;
+  // Đã được xáo sẵn trên server (xem app/exam/[id]/vocabulary/page.tsx)
+  initialQuestions: VocabQuestion[];
 }
 
 type AnswerState = 'unanswered' | 'correct' | 'incorrect';
@@ -48,29 +37,9 @@ function formatTime(totalSeconds: number): string {
   return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
-export default function VocabularyPractice({ exam }: Props) {
-  const [questions, setQuestions] = useState<VocabQuestion[]>([]);
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    const shuffled = shuffleArray(exam.vocabulary);
-    const qs = shuffled.map((word) => {
-      const { options, correctIndex } = createVocabMultipleChoice(word);
-      return {
-        wordId: word.id,
-        word: word.word,
-        pronunciation: word.pronunciation,
-        partOfSpeech: word.partOfSpeech,
-        definition: word.definition,
-        exampleSentence: word.exampleSentence,
-        exampleTranslation: word.exampleTranslation,
-        options,
-        correctIndex,
-      };
-    });
-    setQuestions(qs);
-    setIsReady(true);
-  }, [exam.vocabulary]);
+export default function VocabularyPractice({ exam, initialQuestions }: Props) {
+  // Prop chỉ dùng làm giá trị khởi tạo; "Làm lại" sẽ xáo bộ mới bằng setQuestions
+  const [questions, setQuestions] = useState<VocabQuestion[]>(initialQuestions);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -84,13 +53,12 @@ export default function VocabularyPractice({ exam }: Props) {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    if (!isReady) return;
     startTimeRef.current = Date.now();
     timerRef.current = setInterval(() => {
       setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
     }, 1000);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [isReady]);
+  }, []);
 
   useEffect(() => {
     if (isFinished && timerRef.current) {
@@ -133,17 +101,8 @@ export default function VocabularyPractice({ exam }: Props) {
   };
 
   const handleRestart = () => {
-    const shuffled = shuffleArray(exam.vocabulary);
-    const qs = shuffled.map((word) => {
-      const { options, correctIndex } = createVocabMultipleChoice(word);
-      return {
-        wordId: word.id, word: word.word, pronunciation: word.pronunciation,
-        partOfSpeech: word.partOfSpeech, definition: word.definition,
-        exampleSentence: word.exampleSentence, exampleTranslation: word.exampleTranslation,
-        options, correctIndex,
-      };
-    });
-    setQuestions(qs);
+    // Event handler chỉ chạy ở trình duyệt, nên gọi hàm ngẫu nhiên ở đây là an toàn
+    setQuestions(buildVocabQuestions(exam.vocabulary));
     setCurrentIndex(0);
     setSelectedAnswer(null);
     setAnswerState('unanswered');
@@ -155,15 +114,6 @@ export default function VocabularyPractice({ exam }: Props) {
       setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
     }, 1000);
   };
-
-  if (!isReady) {
-    return (
-      <div className="flex flex-col items-center justify-center py-20 gap-3">
-        <div className="w-10 h-10 border-4 border-pink-200 border-t-pink-500 rounded-full animate-spin" />
-        <p className="text-gray-400 text-base">Đang chuẩn bị câu hỏi...</p>
-      </div>
-    );
-  }
 
   // Màn hình kết quả
   if (isFinished) {
@@ -385,7 +335,7 @@ export default function VocabularyPractice({ exam }: Props) {
           </div>
           <div className="bg-white rounded-xl p-3 border border-gray-100">
             <p className="text-sm text-gray-400 font-medium mb-1">📝 Ví dụ:</p>
-            <p className="text-base text-gray-700 italic mb-1">"{currentQuestion.exampleSentence}"</p>
+            <p className="text-base text-gray-700 italic mb-1">&ldquo;{currentQuestion.exampleSentence}&rdquo;</p>
             <p className="text-sm text-gray-500">➜ {currentQuestion.exampleTranslation}</p>
           </div>
         </div>

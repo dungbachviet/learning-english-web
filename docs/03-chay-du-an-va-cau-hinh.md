@@ -109,15 +109,15 @@ Danh sách này được khai báo trong [.gitignore](../.gitignore).
 
 ## 4. Kết quả kiểm tra hiện tại
 
-Đây là kết quả chạy thật trên commit `3525d20`:
+Đây là kết quả chạy thật trên code hiện tại:
 
 | Lệnh | Kết quả |
 |------|---------|
 | `npx tsc --noEmit` | Sạch, không có lỗi |
+| `npm run lint` | Sạch, không có lỗi |
 | `npx next build` | Thành công |
-| `npx eslint src` | **4 lỗi**, phân tích ở file 11 |
 
-**Điều rút ra:** `next build` vẫn thành công dù ESLint báo 4 lỗi. Trong lần chạy này, build không hề chạy ESLint. Do đó "build được" chưa có nghĩa là "code sạch"; bạn phải tự chạy `npm run lint`.
+**Lưu ý:** output của `next build` có bước "Running TypeScript" nhưng **không có bước ESLint**. Do đó "build được" chưa có nghĩa là "code sạch"; hãy luôn chạy `npm run lint` riêng.
 
 Bảng route do build in ra cũng rất đáng xem, file 05 sẽ giải thích ý nghĩa:
 
@@ -135,7 +135,7 @@ Route (app)
 
 ## 5. Thử ngay
 
-1. Chạy `npm run lint` và đọc 4 lỗi. Chưa cần hiểu hết.
+1. Trong [ExamSolving.tsx](../src/components/ExamSolving.tsx), đổi `useRef<number>(0)` thành `useRef<number>(Date.now())` rồi chạy `npm run lint`. Đọc lỗi `react-hooks/purity` (giải thích ở file 07), sau đó hoàn tác.
 2. Trong [src/app/page.tsx](../src/app/page.tsx), đổi `exam.title` thành `exam.titel` rồi chạy `npx tsc --noEmit`. Xem TypeScript báo gì, sau đó hoàn tác.
 3. Đổi `@/data/exams` thành `@/data/exam` để xem thông báo lỗi khi không tìm thấy module, sau đó hoàn tác.
 
@@ -150,7 +150,7 @@ Route (app)
 
 1. `19.2.4` khoá đúng phiên bản; `^16.2.6` cho phép cài bản mới hơn trong dòng 16.x.x. Bản được cài thực tế được ghi trong `package-lock.json`.
 2. `src/lib/utils.ts`, do `paths` trong `tsconfig.json` quy định.
-3. Không. Dự án này build thành công dù ESLint báo 4 lỗi.
+3. Không. `next build` chỉ kiểm tra TypeScript, không chạy ESLint. Code vi phạm luật ESLint vẫn build thành công.
 
 </details>
 

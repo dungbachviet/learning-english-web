@@ -20,7 +20,7 @@ Thời gian dưới đây chỉ là ước lượng, đã bao gồm việc mở 
 | [05. Server và Client](05-server-va-client-components.md) | Code chạy ở đâu? | SSR, RSC payload, hydration | 90 phút |
 | [06. Dữ liệu và TypeScript](06-du-lieu-va-typescript.md) | Dữ liệu có hình dạng gì? | `interface`, optional, luồng prop | 40 phút |
 | [07. ExamSolving](07-exam-solving.md) | State điều khiển UI ra sao? | State, derived state, effect, ref | 120 phút |
-| [08. VocabularyPractice](08-vocabulary-practice.md) | Vì sao shuffle trong effect? | Hydration mismatch, Strict Mode | 60 phút |
+| [08. VocabularyPractice](08-vocabulary-practice.md) | Vì sao xáo câu hỏi trên server? | Hydration mismatch, Strict Mode | 60 phút |
 | [09. Tailwind và giao diện](09-tailwind-va-giao-dien.md) | Class biến thành CSS thế nào? | Utility class, responsive, cascade layer | 45 phút |
 | [10. Tiện ích và âm thanh](10-tien-ich-va-am-thanh.md) | Hàm thuần là gì? | Fisher-Yates, generic, Web Audio | 40 phút |
 | [11. Đánh giá và bài tập](11-danh-gia-va-bai-tap.md) | Tự làm được chưa? | Nợ kỹ thuật, bài tập, cách đọc dự án mới | Tuỳ bạn |
@@ -75,7 +75,7 @@ Mỗi file nên đọc theo bốn bước:
 
 ## 5. Về độ tin cậy của tài liệu
 
-- Các con số và hành vi đều được **đo trên code thật** vào ngày 2026-11-05, với production build của commit `3525d20`. Nơi nào là kết quả đo, tài liệu ghi rõ là đã đo hoặc đã thử.
+- Các con số và hành vi đều được **đo trên code thật** với production build của code hiện tại. Nơi nào là kết quả đo, tài liệu ghi rõ là đã đo hoặc đã thử.
 - Số dòng trong link có thể lệch khi code thay đổi. Khi đó hãy tìm theo tên hàm.
 - `README.md` ở gốc dự án đã **cũ một phần**, ví dụ vẫn hướng dẫn thêm đề thẳng vào `exams.ts`. Khi có khác biệt, hãy tin code và file 06 của bộ tài liệu này.
 

@@ -10,6 +10,19 @@ export interface VocabularyWord {
   wrongOptions: string[]; // 3 đáp án sai (nghĩa tiếng Việt)
 }
 
+// Một câu hỏi trắc nghiệm từ vựng, đã xáo đáp án (tạo bởi buildVocabQuestions)
+export interface VocabQuestion {
+  wordId: string;
+  word: string;
+  pronunciation?: string;
+  partOfSpeech?: string;
+  definition: string;
+  exampleSentence: string;
+  exampleTranslation: string;
+  options: string[];
+  correctIndex: number;
+}
+
 // Câu hỏi trong đề thi (phần giải đề)
 export interface ExamQuestion {
   id: string;

@@ -20,11 +20,11 @@ Cấu trúc file đi theo thứ tự rất nên học theo:
 |------|----------|----------------|
 | [15-44](../src/components/ExamSolving.tsx#L15-L44) | Hằng số: nhãn, màu, lời động viên | Ngoài component nên không bị tạo lại mỗi lần render |
 | [46-76](../src/components/ExamSolving.tsx#L46-L76) | Hàm phụ: `formatTime`, `renderBoldText` | Không cần state nên để ngoài |
-| [79-113](../src/components/ExamSolving.tsx#L79-L113) | Hook: state, ref, effect | Luôn gọi theo cùng thứ tự |
-| [115-118](../src/components/ExamSolving.tsx#L115-L118) | Giá trị suy ra từ state | Tính lại ở mỗi lần render |
-| [120-150](../src/components/ExamSolving.tsx#L120-L150) | Event handler | Nơi state thay đổi |
-| [153-254](../src/components/ExamSolving.tsx#L153-L254) | Giao diện kết quả | Trả về sớm khi `isFinished` |
-| [260-413](../src/components/ExamSolving.tsx#L260-L413) | Giao diện làm bài | Trường hợp còn lại |
+| [79-114](../src/components/ExamSolving.tsx#L79-L114) | Hook: state, ref, effect | Luôn gọi theo cùng thứ tự |
+| [116-119](../src/components/ExamSolving.tsx#L116-L119) | Giá trị suy ra từ state | Tính lại ở mỗi lần render |
+| [121-151](../src/components/ExamSolving.tsx#L121-L151) | Event handler | Nơi state thay đổi |
+| [154-255](../src/components/ExamSolving.tsx#L154-L255) | Giao diện kết quả | Trả về sớm khi `isFinished` |
+| [257-414](../src/components/ExamSolving.tsx#L257-L414) | Giao diện làm bài | Trường hợp còn lại |
 
 ## 2. Năm biến state
 
@@ -168,7 +168,7 @@ Thẻ câu hỏi có class `animate-slide-up`. Bạn có thể đoán rằng m�
 
 ```tsx
 const [elapsed, setElapsed] = useState(0);
-const startTimeRef = useRef<number>(Date.now());
+const startTimeRef = useRef<number>(0);
 const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
 useEffect(() => {
@@ -191,6 +191,8 @@ useEffect(() => {
 | ID của interval | `useRef` | Tương tự, chỉ để gọi `clearInterval` |
 
 > **Quy tắc phân biệt:** giá trị xuất hiện trong JSX thì dùng state. Giá trị chỉ dùng cho logic bên trong thì dùng ref.
+
+**Vì sao khởi tạo `startTimeRef` bằng `0` chứ không phải `Date.now()`?** Giá trị thật được gán trong effect, ngay trước khi đồng hồ bắt đầu chạy. Còn `useRef(Date.now())` sẽ gọi một hàm không thuần **trong lúc render**, mỗi lần render ra một kết quả khác nhau. ESLint chặn cách viết đó bằng luật `react-hooks/purity`.
 
 ### Vì sao tính từ `Date.now()` thay vì `setElapsed(prev => prev + 1)`?
 

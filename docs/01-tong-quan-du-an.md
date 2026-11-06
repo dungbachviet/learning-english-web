@@ -57,7 +57,7 @@ Làm hết câu thì hiện màn hình kết quả, **vẫn cùng URL**:
 
 ### 2.5. Ôn từ vựng: `/exam/de-mau-01/vocabulary`
 
-Bố cục gần giống giải đề, nhưng thứ tự từ và thứ tự đáp án được **xáo ngẫu nhiên mỗi lần vào trang**. Chi tiết nhỏ này quyết định cách viết code khá khác, xem file 08.
+Bố cục gần giống giải đề, nhưng thứ tự từ và thứ tự đáp án được **xáo ngẫu nhiên mỗi lần vào trang**. Chi tiết nhỏ này quyết định nơi đặt code: việc xáo phải nằm trên server, xem file 08.
 
 ![Ôn từ vựng](images/01-on-tu-vung.png)
 
@@ -114,8 +114,8 @@ learning-english-web/
 │   │       ├── solving/page.tsx  URL /exam/:id/solving
 │   │       └── vocabulary/page.tsx  URL /exam/:id/vocabulary
 │   ├── components/               Component tương tác (Client Components)
-│   │   ├── ExamSolving.tsx       414 dòng: toàn bộ logic giải đề
-│   │   └── VocabularyPractice.tsx 405 dòng: toàn bộ logic ôn từ vựng
+│   │   ├── ExamSolving.tsx       415 dòng: toàn bộ logic giải đề
+│   │   └── VocabularyPractice.tsx 355 dòng: toàn bộ logic ôn từ vựng
 │   ├── data/
 │   │   ├── exams.ts              Gom tất cả đề thành một mảng
 │   │   └── exams/de-mau-XX.ts    22 file nội dung, khoảng 11.700 dòng

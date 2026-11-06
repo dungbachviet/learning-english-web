@@ -66,11 +66,11 @@ Tôi đã mở cùng một trang trong hai điều kiện:
 
 Hai bên gần như giống hệt nhau. Bên trái, chỉ có HTML từ server, đồng hồ đứng ở `00:00` và các nút không phản ứng. Điều này chứng minh rằng **`ExamSolving` đã được render trên server**, dù nó là Client Component. Còn `useEffect`, nơi khởi động đồng hồ, **chỉ chạy trong trình duyệt**.
 
-Trang từ vựng cho kết quả khác hẳn:
+Trang từ vựng cũng vậy. Câu hỏi ở đây được xáo ngẫu nhiên, nhưng việc xáo diễn ra trên server nên HTML đã có sẵn nội dung:
 
 ![Từ vựng khi có và không có JavaScript](images/05-tu-vung-co-va-khong-js.png)
 
-HTML từ server chỉ có spinner, vì câu hỏi được tạo trong `useEffect`. File 08 sẽ giải thích vì sao phải làm như vậy.
+Hai bên hiện từ khác nhau vì đây là hai lần tải riêng, mỗi request được xáo một lần. File 08 giải thích vì sao việc xáo phải nằm trên server.
 
 **Bạn tự làm được:** DevTools > `Cmd+Shift+P` > gõ `Disable JavaScript` > tải lại trang.
 
@@ -104,7 +104,7 @@ return <ExamSolving exam={exam} />;
 | `/` | ○ Static | 93.852 byte | Không, chỉ có thông tin hiển thị |
 | `/exam/de-mau-01` | ƒ Dynamic | 19.384 byte | Không |
 | `/exam/de-mau-01/solving` | ƒ Dynamic | 35.314 byte | **Có** |
-| `/exam/de-mau-01/vocabulary` | ƒ Dynamic | 31.705 byte | **Có** |
+| `/exam/de-mau-01/vocabulary` | ƒ Dynamic | 44.127 byte | **Có**, từ vựng có mặt hai lần |
 | `/exam/khong-ton-tai` | ƒ 404 | 7.726 byte | Không |
 
 *Kích thước chưa nén. Trang chủ lớn vì có 22 thẻ với rất nhiều class Tailwind.*
@@ -112,7 +112,7 @@ return <ExamSolving exam={exam} />;
 Từ bảng này rút ra hai bài học thực tế:
 
 1. **Đáp án nằm trong page source.** Ai biết xem nguồn trang đều đọc được `correctAnswer`. Với app ôn tập thì không sao, nhưng với **thi thật có tính điểm thì không được làm như vậy**. Mọi prop truyền xuống Client Component đều công khai.
-2. **Đang truyền thừa dữ liệu.** Trang giải đề nhận cả `exam.vocabulary` dù không dùng. Trang từ vựng cũng nhận cả `questions`. Có thể truyền ít hơn, đây là một bài tập ở file 11.
+2. **Đang truyền thừa dữ liệu.** Trang giải đề nhận cả `exam.vocabulary` dù không dùng. Trang từ vựng nhận cả `questions`, và danh sách từ vựng có mặt hai lần: trong `exam` và trong `initialQuestions` đã xáo (xem file 08). Có thể truyền ít hơn, đây là một bài tập ở file 11.
 
 > **Quy tắc rút ra:** Prop truyền từ Server sang Client Component phải tuần tự hoá được, và **coi như công khai**. Không truyền mật khẩu hay API key qua đây.
 

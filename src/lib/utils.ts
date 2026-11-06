@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from 'clsx';
+import type { VocabQuestion, VocabularyWord } from '@/types';
 
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
@@ -21,6 +22,26 @@ export function createVocabMultipleChoice(
   const options = shuffleArray([word.definition, ...word.wrongOptions]);
   const correctIndex = options.indexOf(word.definition);
   return { options, correctIndex };
+}
+
+// Tạo bộ câu hỏi từ vựng: xáo thứ tự từ và thứ tự đáp án của từng từ.
+// Kết quả ngẫu nhiên, nên chỉ gọi ở Server Component (mỗi request) hoặc trong event handler,
+// không gọi trong lúc render của Client Component (sẽ gây hydration mismatch).
+export function buildVocabQuestions(vocabulary: VocabularyWord[]): VocabQuestion[] {
+  return shuffleArray(vocabulary).map((word) => {
+    const { options, correctIndex } = createVocabMultipleChoice(word);
+    return {
+      wordId: word.id,
+      word: word.word,
+      pronunciation: word.pronunciation,
+      partOfSpeech: word.partOfSpeech,
+      definition: word.definition,
+      exampleSentence: word.exampleSentence,
+      exampleTranslation: word.exampleTranslation,
+      options,
+      correctIndex,
+    };
+  });
 }
 
 // Tính phần trăm

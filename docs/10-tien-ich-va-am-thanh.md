@@ -13,10 +13,11 @@
 | `cn` | Có | Khắp các component |
 | `calculatePercentage` | Có | Màn hình kết quả |
 | `getGrade` | Có | Màn hình kết quả |
-| `shuffleArray` | **Không**, vì dùng `Math.random` | Tạo câu hỏi từ vựng |
-| `createVocabMultipleChoice` | **Không**, vì gọi `shuffleArray` | Tạo câu hỏi từ vựng |
+| `shuffleArray` | **Không**, vì dùng `Math.random` | Bên trong hai hàm dưới |
+| `createVocabMultipleChoice` | **Không**, vì gọi `shuffleArray` | Bên trong `buildVocabQuestions` |
+| `buildVocabQuestions` | **Không**, vì gọi hai hàm trên | Trang từ vựng (server) và nút "Làm lại" |
 
-Hai hàm cuối chính là thứ gây ra vấn đề hydration ở file 08.
+Ba hàm không thuần chỉ được gọi trên server hoặc trong event handler, không bao giờ trong lúc render của Client Component. Lý do ở file 08.
 
 ### 1.1. `shuffleArray`: thuật toán Fisher-Yates
 
@@ -43,7 +44,7 @@ Mỗi bước chọn ngẫu nhiên một phần tử trong đoạn chưa cố đ
 
 Ba điểm đáng học trong đoạn code:
 
-1. **`[...array]` tạo bản sao.** Nếu không, hàm sẽ xáo luôn mảng gốc `exam.vocabulary` đang là prop. Prop không được phép bị sửa.
+1. **`[...array]` tạo bản sao.** Nếu không, hàm sẽ xáo luôn mảng gốc `exam.vocabulary`. Trên server, mảng đó chính là dữ liệu trong module `src/data`, được **dùng chung cho mọi request**. Sửa trực tiếp sẽ làm thay đổi dữ liệu gốc của tất cả người dùng sau đó.
 2. **`i + 1` để `j` có thể bằng `i`.** Một phần tử được phép giữ nguyên vị trí, đây là điều kiện để phân bố đều.
 3. **Destructuring** giúp đổi chỗ không cần biến tạm.
 
@@ -67,7 +68,22 @@ Trong dữ liệu, đáp án đúng được lưu theo nội dung. Sau khi xáo,
 
 **Kiểu tham số chỉ đòi đúng thứ cần dùng** là `{ definition, wrongOptions }`, không đòi cả `VocabularyWord`. TypeScript dùng **structural typing**: object nào có đủ các trường yêu cầu đều được chấp nhận. Hàm vì thế dễ test hơn, vì không phải tạo cả object từ vựng đầy đủ.
 
-### 1.3. `calculatePercentage` và `getGrade`
+### 1.3. `buildVocabQuestions`: ghép mọi thứ lại
+
+```ts
+export function buildVocabQuestions(vocabulary: VocabularyWord[]): VocabQuestion[] {
+  return shuffleArray(vocabulary).map((word) => {
+    const { options, correctIndex } = createVocabMultipleChoice(word);
+    return { wordId: word.id, word: word.word, /* ... */ options, correctIndex };
+  });
+}
+```
+
+Hàm này xáo thứ tự từ, rồi xáo đáp án của từng từ. Nó biến dữ liệu gốc dạng `VocabularyWord` thành `VocabQuestion`, đúng dạng mà giao diện cần.
+
+Vì dùng ở hai nơi là Server Component và nút "Làm lại", hàm được đặt trong `lib/utils.ts` thay vì trong component. Đây là lợi ích của việc tách logic ra khỏi React: **cùng một hàm chạy được ở cả server và trình duyệt.**
+
+### 1.4. `calculatePercentage` và `getGrade`
 
 ```ts
 if (total === 0) return 0;        // Tránh chia cho 0
@@ -82,7 +98,7 @@ if (percentage >= 80) return { label: 'Giỏi! 🌟', color: 'text-green-500' };
 
 Viết các `if` có `return` theo thứ tự giảm dần giúp không cần `else`. Nên nhớ quy tắc này khi đọc code: đến `>= 80`, ta biết chắc giá trị nhỏ hơn 90.
 
-### 1.4. `cn`
+### 1.5. `cn`
 
 ```ts
 export function cn(...inputs: ClassValue[]) {
@@ -199,7 +215,7 @@ Mục cuối là một nguyên tắc thiết kế hay: **tính năng phụ thấ
 <summary>Đáp án</summary>
 
 1. Cùng đầu vào cho ra đầu ra khác nhau do dùng `Math.random`.
-2. Hàm sẽ sửa trực tiếp mảng đầu vào, tức là sửa prop `exam.vocabulary`.
+2. Hàm sẽ sửa trực tiếp mảng đầu vào. Trên server, đó là dữ liệu đề thi dùng chung cho mọi request.
 3. Giao diện không phụ thuộc vào nó, và nhiều component có thể dùng chung một context.
 4. `exponentialRampToValueAtTime` không thể đi tới đúng 0.
 5. Được. `getAudioContext` trả về `null`, các hàm phát âm thanh sẽ thoát sớm.

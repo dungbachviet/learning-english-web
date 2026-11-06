@@ -102,7 +102,7 @@ Tailwind cho phép thêm class riêng trong [globals.css](../src/app/globals.css
 ```
 
 - `animate-fade-in`, `animate-slide-up`, `animate-bounce-in` là tự viết.
-- `animate-spin` (spinner) và `animate-pulse` (đồng hồ quá 5 phút) có sẵn trong Tailwind.
+- `animate-pulse`, dùng khi đồng hồ quá 5 phút, có sẵn trong Tailwind.
 
 ### 3.5. `sticky` header
 

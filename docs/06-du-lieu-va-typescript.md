@@ -106,6 +106,8 @@ export const getExamById = (id: string): Exam | undefined => {
 
 *Xanh là phần chạy trên server, hồng là Client Component.*
 
+Trang từ vựng có thêm một bước: gọi `buildVocabQuestions` để xáo câu hỏi trên server, rồi truyền kết quả xuống qua prop `initialQuestions`. Kiểu của kết quả này là `VocabQuestion`, cũng nằm trong [src/types/index.ts](../src/types/index.ts). Lý do xáo trên server được giải thích ở file 08.
+
 Đây là **luồng một chiều**, đúng tinh thần React. Dữ liệu chỉ đi xuống qua prop, và không component nào sửa `exam`. Những thứ thay đổi trong lúc làm bài đều nằm trong state riêng của component.
 
 ## 4. Câu hỏi về dữ liệu trong thực tế

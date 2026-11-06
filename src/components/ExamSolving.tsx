@@ -84,7 +84,8 @@ export default function ExamSolving({ exam }: Props) {
 
   // ⏱ Đồng hồ đếm giờ
   const [elapsed, setElapsed] = useState(0);
-  const startTimeRef = useRef<number>(Date.now());
+  // Giá trị thật được gán trong useEffect bên dưới (không gọi Date.now() lúc render)
+  const startTimeRef = useRef<number>(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
