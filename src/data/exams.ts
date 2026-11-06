@@ -2,11 +2,16 @@
  * src/data/exams.ts — Index file tổng hợp tất cả đề thi
  *
  * Cách thêm đề thi mới:
- *   1. Tạo file mới trong src/data/exams/de-XX.ts
+ *   1. Tạo file mới src/data/exams/de-mau-XX.ts, đặt `id: 'de-mau-XX'` (id cũng là phần [id] trên URL)
  *   2. Export default một object kiểu Exam
- *   3. Import và thêm vào mảng `allExams` bên dưới
+ *   3. Import và thêm vào mảng `exams` bên dưới
+ *   4. Chạy `npx tsc --noEmit` để bắt lỗi dữ liệu
+ * Không cần sửa trang hay component nào: trang chủ và route [id] tự nhận đề mới.
  *
  * Thứ tự trong mảng = thứ tự hiển thị trên trang chủ.
+ *
+ * Chỉ Server Component import file này → dữ liệu 22 đề KHÔNG nằm trong JS gửi xuống trình duyệt
+ * (xem docs/05, mục 5).
  */
 import { Exam } from '@/types';
 
@@ -58,6 +63,7 @@ export const exams: Exam[] = [
   deMau22,
 ];
 
+// Trả về undefined khi không tìm thấy → các page bị TypeScript buộc phải xử lý bằng notFound()
 export const getExamById = (id: string): Exam | undefined => {
   return exams.find((exam) => exam.id === id);
 };

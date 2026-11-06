@@ -43,7 +43,7 @@ Tailwind **quét mã nguồn dưới dạng văn bản** để tìm tên class, 
 const cardThemes = [{ vocabBg: 'bg-rose-50', vocabText: 'text-rose-700' }];
 ```
 
-Đây là lý do [src/app/page.tsx](../src/app/page.tsx#L5-L51) viết đầy đủ từng tên class cho 5 bộ màu, dù trông có vẻ dài. Đó là cách làm đúng, không phải code thừa.
+Đây là lý do [src/app/page.tsx](../src/app/page.tsx#L13-L62) viết đầy đủ từng tên class cho 5 bộ màu, dù trông có vẻ dài. Đó là cách làm đúng, không phải code thừa.
 
 Với giá trị thực sự động, hãy dùng `style`:
 
@@ -90,7 +90,7 @@ Class không có tiền tố áp dụng cho mọi kích thước. Tiền tố `s
 
 ### 3.4. Animation tự viết
 
-Tailwind cho phép thêm class riêng trong [globals.css](../src/app/globals.css#L28-L41):
+Tailwind cho phép thêm class riêng trong [globals.css](../src/app/globals.css#L47-L63):
 
 ```css
 @layer utilities {
@@ -118,7 +118,7 @@ Header cuộn theo trang cho tới khi chạm đỉnh rồi dính lại. `z-50` 
 
 ### Lỗi 1: nền gradient không bao giờ hiển thị
 
-[layout.tsx](../src/app/layout.tsx#L17) khai báo nền hồng tím:
+[layout.tsx](../src/app/layout.tsx#L27) khai báo nền hồng tím:
 
 ```tsx
 <body className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-violet-50">
@@ -126,7 +126,7 @@ Header cuộn theo trang cho tới khi chạm đỉnh rồi dính lại. `z-50` 
 
 Nhưng toàn bộ ảnh chụp trong tài liệu đều có nền trắng. **Đo được trong trình duyệt:** `background-image: none`.
 
-**Nguyên nhân** nằm ở [globals.css](../src/app/globals.css#L22-L26):
+**Nguyên nhân** nằm ở [globals.css](../src/app/globals.css#L37-L45):
 
 ```css
 body {

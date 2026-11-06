@@ -1,16 +1,24 @@
 // Tạo âm thanh bằng Web Audio API — không cần file nhạc
+//
+// Mô hình: các "nút" nối với nhau như thiết bị âm thanh, tín hiệu chảy tới loa:
+//   OscillatorNode (tạo sóng) → GainNode (âm lượng) → [BiquadFilterNode (lọc)] → ctx.destination (loa)
+//
+// Chỉ được gọi trong event handler (khi bấm đáp án), không bao giờ lúc render.
+// Giải thích chi tiết: docs/10-tien-ich-va-am-thanh.md, mục 2
 
+// Dùng chung MỘT AudioContext cho cả app. Không phải state vì giao diện không phụ thuộc vào nó
 let audioCtx: AudioContext | null = null;
 
+// Tạo context lười (lần đầu cần mới tạo). Lỗi thì trả null: âm thanh hỏng không được làm hỏng việc làm bài
 function getAudioContext(): AudioContext | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined') return null; // Trên server không có window (lớp bảo vệ thêm)
   try {
     if (!audioCtx) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
       audioCtx = new AudioCtx();
     }
-    if (audioCtx.state === 'suspended') audioCtx.resume();
+    if (audioCtx.state === 'suspended') audioCtx.resume(); // Trình duyệt có thể tạm dừng context cho tới khi người dùng tương tác
     return audioCtx;
   } catch {
     return null;

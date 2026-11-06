@@ -14,17 +14,18 @@ UI = f(state)
 
 Không có dòng nào kiểu "tìm nút này rồi đổi màu". Code chỉ làm hai việc: **đổi state**, và **mô tả giao diện ứng với state hiện tại**. React lo phần cập nhật DOM.
 
-Cấu trúc file đi theo thứ tự rất nên học theo:
+Cấu trúc file đi theo thứ tự rất nên học theo. Trong code, mỗi phần được đánh dấu bằng banner `§1` đến `§6`, nên bạn có thể tìm nhanh bằng `Cmd+F`:
 
-| Dòng | Nội dung | Vì sao đặt ở đó |
-|------|----------|----------------|
-| [15-44](../src/components/ExamSolving.tsx#L15-L44) | Hằng số: nhãn, màu, lời động viên | Ngoài component nên không bị tạo lại mỗi lần render |
-| [46-76](../src/components/ExamSolving.tsx#L46-L76) | Hàm phụ: `formatTime`, `renderBoldText` | Không cần state nên để ngoài |
-| [79-114](../src/components/ExamSolving.tsx#L79-L114) | Hook: state, ref, effect | Luôn gọi theo cùng thứ tự |
-| [116-119](../src/components/ExamSolving.tsx#L116-L119) | Giá trị suy ra từ state | Tính lại ở mỗi lần render |
-| [121-151](../src/components/ExamSolving.tsx#L121-L151) | Event handler | Nơi state thay đổi |
-| [154-255](../src/components/ExamSolving.tsx#L154-L255) | Giao diện kết quả | Trả về sớm khi `isFinished` |
-| [257-414](../src/components/ExamSolving.tsx#L257-L414) | Giao diện làm bài | Trường hợp còn lại |
+| Phần | Dòng | Nội dung | Vì sao đặt ở đó |
+|------|------|----------|----------------|
+| §1 | [33-104](../src/components/ExamSolving.tsx#L33-L104) | Hằng số (nhãn, màu, lời động viên) và hàm phụ (`formatTime`, `renderBoldText`) | Ngoài component nên không bị tạo lại mỗi lần render, không cần state |
+| §2 | [107-153](../src/components/ExamSolving.tsx#L107-L153) | Hook: state, ref, effect | Luôn gọi theo cùng thứ tự |
+| §3 | [155-163](../src/components/ExamSolving.tsx#L155-L163) | Giá trị suy ra từ state | Tính lại ở mỗi lần render |
+| §4 | [165-204](../src/components/ExamSolving.tsx#L165-L204) | Event handler | Nơi state thay đổi |
+| §5 | [206-315](../src/components/ExamSolving.tsx#L206-L315) | Giao diện kết quả | Trả về sớm khi `isFinished` |
+| §6 | [317-487](../src/components/ExamSolving.tsx#L317-L487) | Giao diện làm bài, vùng ① đến ⑦ | Trường hợp còn lại |
+
+Trong JSX, mỗi vùng giao diện cũng có comment đánh số ① đến ⑦, khớp với ảnh chú thích ở mục 2.
 
 ## 2. Năm biến state
 

@@ -1,9 +1,16 @@
+/**
+ * URL: /exam/[id]/vocabulary, ví dụ /exam/de-mau-01/vocabulary
+ *
+ * Server Component: tìm đề, XÁO câu hỏi trên server, rồi giao cho VocabularyPractice.
+ * Vì sao xáo ở đây mà không xáo trong component? Xem docs/08-vocabulary-practice.md.
+ */
 import { notFound } from 'next/navigation';
 import { getExamById } from '@/data/exams';
 import { buildVocabQuestions } from '@/lib/utils';
 import VocabularyPractice from '@/components/VocabularyPractice';
 
 interface Props {
+  // Next.js 16: params là Promise, bắt buộc phải await (xem docs/04, mục 2)
   params: Promise<{ id: string }>;
 }
 

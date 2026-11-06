@@ -1,8 +1,16 @@
+/**
+ * URL: /exam/[id], ví dụ /exam/de-mau-01  (Chi tiết đề: chọn chế độ học)
+ *
+ * Server Component, không có state. Thư mục `[id]` = đoạn URL là biến (dynamic route).
+ * Các vùng giao diện: Nút quay lại → Thông tin đề → 2 thẻ chọn chế độ (Ôn từ vựng | Giải đề).
+ * Ảnh: docs/images/01-chi-tiet-de.png
+ */
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getExamById } from '@/data/exams';
 
 interface Props {
+  // Next.js 16: params là Promise, bắt buộc phải await (xem docs/04, mục 2)
   params: Promise<{ id: string }>;
 }
 
@@ -11,18 +19,18 @@ export default async function ExamDetailPage({ params }: Props) {
   const exam = getExamById(id);
 
   if (!exam) {
-    notFound();
+    notFound(); // id không tồn tại → src/app/not-found.tsx, HTTP 404
   }
 
   return (
     <div className="animate-fade-in">
-      {/* Back button */}
+      {/* ═══ NÚT QUAY LẠI trang chủ ═══ */}
       <Link href="/" className="inline-flex items-center gap-2 bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-blue-600 hover:text-blue-700 font-medium rounded-xl px-4 py-2.5 mb-5 shadow-sm transition-all duration-200 group">
         <span className="text-lg group-hover:-translate-x-0.5 transition-transform">←</span>
         <span>Quay lại danh sách đề</span>
       </Link>
 
-      {/* Exam info */}
+      {/* ═══ THÔNG TIN ĐỀ: tên, trường, năm, số từ vựng, số câu hỏi ═══ */}
       <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-6">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-xl shadow-sm">
@@ -48,11 +56,11 @@ export default async function ExamDetailPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Mode selection */}
+      {/* ═══ CHỌN CHẾ ĐỘ: mỗi thẻ là một <Link> tới route con ═══ */}
       <h3 className="text-base font-bold text-gray-700 mb-3">Chọn chế độ học:</h3>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        {/* Vocabulary mode */}
+        {/* Thẻ "Ôn Từ Vựng" → /exam/[id]/vocabulary */}
         <Link href={`/exam/${exam.id}/vocabulary`} className="block group">
           <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:border-green-300 hover:shadow-md transition-all duration-200 group-hover:-translate-y-0.5 h-full">
             <div className="flex items-center gap-3 mb-3">
@@ -87,7 +95,7 @@ export default async function ExamDetailPage({ params }: Props) {
           </div>
         </Link>
 
-        {/* Exam solving mode */}
+        {/* Thẻ "Giải Đề Thi" → /exam/[id]/solving */}
         <Link href={`/exam/${exam.id}/solving`} className="block group">
           <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition-all duration-200 group-hover:-translate-y-0.5 h-full">
             <div className="flex items-center gap-3 mb-3">

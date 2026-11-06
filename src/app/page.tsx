@@ -1,7 +1,18 @@
+/**
+ * URL: /  (Trang chủ)
+ *
+ * Server Component, KHÔNG có state: chỉ đọc dữ liệu rồi hiển thị.
+ * Là trang Static (○): HTML được tạo sẵn một lần lúc `next build`.
+ *
+ * Các vùng giao diện (khớp ảnh docs/images/01-trang-chu-chu-thich.png):
+ *   ① Lời chào   ② Ba ô thống kê   ③④ Danh sách thẻ đề thi   + Mẹo học
+ */
 import Link from 'next/link';
-import { exams } from '@/data/exams';
+import { exams } from '@/data/exams'; // Import trực tiếp dữ liệu: chỉ chạy trên server, không vào JS bundle
 
 // Màu sắc xoay vòng cho từng thẻ đề thi
+// Phải viết ĐẦY ĐỦ tên class (không ghép kiểu `bg-${color}-50`) vì Tailwind quét mã nguồn
+// dạng văn bản để biết cần sinh CSS cho class nào (xem docs/09, mục 2)
 const cardThemes = [
   {
     topBar: 'from-rose-400 to-pink-500',
@@ -51,12 +62,13 @@ const cardThemes = [
 ];
 
 export default function HomePage() {
+  // Tính tổng từ dữ liệu thay vì lưu sẵn một con số (tránh 2 nguồn dữ liệu lệch nhau)
   const totalVocab = exams.reduce((sum, e) => sum + e.vocabulary.length, 0);
   const totalQuestions = exams.reduce((sum, e) => sum + e.questions.length, 0);
 
   return (
     <div className="animate-fade-in">
-      {/* Hero — cá nhân hoá cho Nhã Phương */}
+      {/* ═══ ① HERO: lời chào cá nhân hoá cho Nhã Phương ═══ */}
       <div className="text-center mb-8">
         <div className="text-5xl mb-3">🌸</div>
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">
@@ -68,7 +80,7 @@ export default function HomePage() {
         </p>
       </div>
 
-      {/* Stats */}
+      {/* ═══ ② THỐNG KÊ: số đề, số từ vựng, số câu hỏi ═══ */}
       <div className="grid grid-cols-3 gap-3 mb-8">
         <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-pink-100">
           <div className="text-3xl font-bold text-pink-500">{exams.length}</div>
@@ -84,14 +96,15 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Exam list */}
+      {/* ═══ ③④ DANH SÁCH ĐỀ: 1 cột trên điện thoại, 2 cột từ 640px (sm:grid-cols-2) ═══ */}
       <h3 className="text-lg font-bold text-gray-700 mb-3 flex items-center gap-2">
         <span>📋</span> Chọn đề để luyện tập:
       </h3>
       <div className="grid gap-4 sm:grid-cols-2">
         {exams.map((exam, index) => {
-          const theme = cardThemes[index % cardThemes.length];
+          const theme = cardThemes[index % cardThemes.length]; // 5 bộ màu xoay vòng: 0,1,2,3,4,0,1...
           return (
+            // key = id ổn định (không dùng index). `group` để các con dùng group-hover: khi rê chuột vào thẻ
             <Link key={exam.id} href={`/exam/${exam.id}`} className="block group">
               <div className={`bg-white rounded-2xl overflow-hidden shadow-sm border ${theme.border} hover:shadow-md transition-all duration-200 group-hover:-translate-y-1`}>
                 {/* Dải màu trên đầu card */}
@@ -137,7 +150,7 @@ export default function HomePage() {
         })}
       </div>
 
-      {/* Động viên */}
+      {/* ═══ MẸO HỌC (nội dung tĩnh) ═══ */}
       <div className="mt-8 bg-gradient-to-r from-pink-50 to-violet-50 rounded-2xl p-5 border border-pink-100">
         <h3 className="font-bold text-pink-700 mb-3 flex items-center gap-2 text-base">
           <span>💡</span> Mẹo cho Nhã Phương

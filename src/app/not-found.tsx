@@ -1,3 +1,9 @@
+/**
+ * Trang 404. Tên file `not-found.tsx` có ý nghĩa đặc biệt với Next.js, được hiện khi:
+ *   - URL không khớp route nào, hoặc
+ *   - một page gọi notFound() (ví dụ /exam/khong-ton-tai).
+ * Trả về HTTP 404 thật, không chỉ là giao diện báo lỗi.
+ */
 import Link from 'next/link';
 
 export default function NotFound() {

@@ -1,23 +1,26 @@
+// tsconfig.json: cấu hình TypeScript (file này cho phép viết comment).
+// Giải thích: docs/03-chay-du-an-va-cau-hinh.md, mục 3.2
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext"], // Có sẵn kiểu cho window, document...
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
+    "skipLibCheck": true, // Không kiểm tra kiểu bên trong node_modules để chạy nhanh hơn
+    "strict": true, // Bật toàn bộ kiểm tra nghiêm ngặt, ví dụ bắt buộc xử lý undefined
+    "noEmit": true, // TypeScript chỉ kiểm tra, việc biên dịch đã có Next.js lo
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
-    "incremental": true,
+    "jsx": "react-jsx", // Dùng JSX mà không cần `import React`
+    "incremental": true, // Lưu cache vào tsconfig.tsbuildinfo để lần sau kiểm tra nhanh hơn
     "plugins": [
       {
-        "name": "next"
+        "name": "next" // Plugin giúp editor kiểm tra quy tắc riêng của Next.js
       }
     ],
+    // Alias: `@/lib/utils` nghĩa là `src/lib/utils`, không cần ../../..
     "paths": {
       "@/*": ["./src/*"]
     }

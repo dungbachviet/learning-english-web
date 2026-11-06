@@ -1,5 +1,22 @@
-'use client';
+'use client'; // Client Component: cần state, effect, onClick. Vẫn được render trước trên server ở lần tải đầu
 
+/**
+ * VocabularyPractice: màn hình "Ôn từ vựng" (URL /exam/[id]/vocabulary).
+ * Nhận prop từ Server Component src/app/exam/[id]/vocabulary/page.tsx:
+ *   - exam:             để hiện tiêu đề và để xáo lại khi "Làm lại"
+ *   - initialQuestions: bộ câu hỏi ĐÃ XÁO SẴN trên server (xem docs/08, mục 3)
+ *
+ * Cấu trúc và máy trạng thái giống hệt ExamSolving.tsx (đọc file đó trước). Khác biệt chính:
+ *   - Câu hỏi đến từ prop đã xáo, không có sẵn trong dữ liệu
+ *   - answerState có 3 giá trị: unanswered | correct | incorrect
+ *   - Phản hồi hiện câu ví dụ thay vì lời giải thích
+ *   - Màn hình kết quả không có ô chi tiết từng câu
+ *
+ * BẢN ĐỒ FILE: §1 Hằng số · §2 State/ref/effect · §3 Giá trị suy ra · §4 Event handler
+ *              §5 UI KẾT QUẢ · §6 UI LÀM BÀI (vùng ①..⑦ giống ExamSolving)
+ * Ảnh minh hoạ: docs/images/08-tu-vung-chu-thich.png
+ * Giải thích chi tiết: docs/08-vocabulary-practice.md
+ */
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Exam, VocabQuestion } from '@/types';
@@ -13,6 +30,10 @@ interface Props {
 }
 
 type AnswerState = 'unanswered' | 'correct' | 'incorrect';
+
+// ═════════════════════════════════════════════════════════════════════
+// §1 HẰNG SỐ VÀ HÀM PHỤ
+// ═════════════════════════════════════════════════════════════════════
 
 // Tin nhắn cổ vũ Nhã Phương (xoay vòng theo index câu hỏi)
 const correctMessages = [
@@ -31,6 +52,7 @@ const incorrectMessages = [
   { main: '🌸 Không sao!', sub: 'Lần này sai, lần sau nhớ mãi!' },
 ];
 
+// 125 → "02:05"
 function formatTime(totalSeconds: number): string {
   const m = Math.floor(totalSeconds / 60);
   const s = totalSeconds % 60;
@@ -38,20 +60,26 @@ function formatTime(totalSeconds: number): string {
 }
 
 export default function VocabularyPractice({ exam, initialQuestions }: Props) {
+  // ═════════════════════════════════════════════════════════════════════
+  // §2 STATE, REF, EFFECT  (mọi hook phải đứng trước các lệnh `return` sớm)
+  // ═════════════════════════════════════════════════════════════════════
+
   // Prop chỉ dùng làm giá trị khởi tạo; "Làm lại" sẽ xáo bộ mới bằng setQuestions
+  // KHÔNG xáo ở đây (kể cả useState(() => ...)): chạy cả trên server lẫn trình duyệt → hydration mismatch
   const [questions, setQuestions] = useState<VocabQuestion[]>(initialQuestions);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0); // Đang ở câu thứ mấy (0-based)
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null); // Đáp án đã chọn, null = chưa chọn
   const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
-  const [results, setResults] = useState<Array<{ correct: boolean }>>([]);
-  const [isFinished, setIsFinished] = useState(false);
+  const [results, setResults] = useState<Array<{ correct: boolean }>>([]); // Kết quả từng câu đã làm
+  const [isFinished, setIsFinished] = useState(false); // true → hiện màn hình kết quả
 
-  // ⏱ Đồng hồ đếm giờ
+  // ⏱ Đồng hồ đếm giờ (giải thích chi tiết ở ExamSolving.tsx và docs/07, mục 8)
   const [elapsed, setElapsed] = useState(0);
   const startTimeRef = useRef<number>(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // Bắt đầu đồng hồ khi mount. Ở dev, Strict Mode chạy mount → cleanup → mount (xem docs/08, mục 7)
   useEffect(() => {
     startTimeRef.current = Date.now();
     timerRef.current = setInterval(() => {
@@ -60,6 +88,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []);
 
+  // Dừng đồng hồ khi làm xong bài
   useEffect(() => {
     if (isFinished && timerRef.current) {
       clearInterval(timerRef.current);
@@ -77,10 +106,20 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
     }
   }, [answerState]);
 
+  // ═════════════════════════════════════════════════════════════════════
+  // §3 GIÁ TRỊ SUY RA: tính lại mỗi lần render, không lưu vào state
+  // ═════════════════════════════════════════════════════════════════════
+
+  // Lưu ý: nếu một đề có vocabulary rỗng, currentQuestion sẽ là undefined mà TS không báo (docs/08, mục 6)
   const currentQuestion = questions[currentIndex];
   const isLastQuestion = currentIndex === questions.length - 1;
   const correctCount = results.filter((r) => r.correct).length;
 
+  // ═════════════════════════════════════════════════════════════════════
+  // §4 EVENT HANDLER
+  // ═════════════════════════════════════════════════════════════════════
+
+  // Bấm một đáp án. Các lần set... bên dưới chỉ gây MỘT lần render (React batching)
   const handleSelectAnswer = (optionIndex: number) => {
     if (answerState !== 'unanswered') return;
     setSelectedAnswer(optionIndex);
@@ -90,6 +129,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
     setResults((prev) => [...prev, { correct: isCorrect }]);
   };
 
+  // Bấm "Câu tiếp theo" hoặc "Xem kết quả"
   const handleNext = () => {
     if (isLastQuestion) {
       setIsFinished(true);
@@ -100,6 +140,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
     }
   };
 
+  // Bấm "Làm lại bài": xáo bộ câu mới, đặt mọi state về ban đầu, khởi động lại đồng hồ
   const handleRestart = () => {
     // Event handler chỉ chạy ở trình duyệt, nên gọi hàm ngẫu nhiên ở đây là an toàn
     setQuestions(buildVocabQuestions(exam.vocabulary));
@@ -115,7 +156,9 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
     }, 1000);
   };
 
-  // Màn hình kết quả
+  // ═════════════════════════════════════════════════════════════════════
+  // §5 UI MÀN HÌNH KẾT QUẢ (cùng URL, chỉ khác state isFinished)
+  // ═════════════════════════════════════════════════════════════════════
   if (isFinished) {
     const percentage = calculatePercentage(correctCount, questions.length);
     const grade = getGrade(percentage);
@@ -147,9 +190,11 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
           <div className="text-6xl mb-3">
             {percentage >= 80 ? '🏆' : percentage >= 60 ? '🌟' : '💪'}
           </div>
+          {/* Xếp loại + lời nhắn */}
           <h2 className="text-2xl font-bold text-gray-800 mb-1">{grade.label}</h2>
           <p className={`text-base font-medium mb-5 ${resultMsg.color}`}>{resultMsg.text}</p>
 
+          {/* Điểm: số câu đúng, thanh %, phần trăm */}
           <div className="bg-gradient-to-r from-pink-50 to-violet-50 rounded-2xl p-5 mb-5">
             <div className="text-5xl font-bold text-pink-500 mb-1">
               {correctCount}/{questions.length}
@@ -181,6 +226,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
             </div>
           </div>
 
+          {/* Nút làm lại + quay lại đề */}
           <div className="space-y-2">
             <button
               onClick={handleRestart}
@@ -200,13 +246,17 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
     );
   }
 
+  // ═════════════════════════════════════════════════════════════════════
+  // §6 UI MÀN HÌNH LÀM BÀI (vùng ①..⑦ giống ExamSolving)
+  // ═════════════════════════════════════════════════════════════════════
+
   const optionLabels = ['A', 'B', 'C', 'D'];
   const correctMsg = correctMessages[currentIndex % correctMessages.length];
   const incorrectMsg = incorrectMessages[currentIndex % incorrectMessages.length];
 
   return (
     <div className="animate-fade-in">
-      {/* Header */}
+      {/* Thanh trên cùng: nút quay lại + "Câu x/y" */}
       <div className="flex items-center justify-between mb-3">
         <Link
           href={`/exam/${exam.id}`}
@@ -221,7 +271,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
         </div>
       </div>
 
-      {/* ⏱ Đồng hồ nổi bật — đổi màu theo thời gian */}
+      {/* ═══ ① ĐỒNG HỒ: xanh < 2 phút, vàng < 5 phút, đỏ nhấp nháy từ 5 phút ═══ */}
       <div className={cn(
         'flex items-center justify-center gap-2 rounded-2xl py-3 mb-4 border-2 transition-colors duration-1000',
         elapsed < 120
@@ -234,7 +284,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
         <span className="text-4xl font-bold font-mono tracking-widest">{formatTime(elapsed)}</span>
       </div>
 
-      {/* Progress bar */}
+      {/* ═══ ② THANH TIẾN ĐỘ ═══ */}
       <div className="bg-gray-200 rounded-full h-2.5 mb-4 overflow-hidden">
         <div
           className="bg-gradient-to-r from-pink-400 to-violet-500 h-2.5 rounded-full transition-all duration-500"
@@ -242,7 +292,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
         />
       </div>
 
-      {/* Score tracker */}
+      {/* ═══ ③ ĐẾM ĐÚNG / SAI ═══ */}
       <div className="flex gap-2 mb-4">
         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
           ✅ {results.filter((r) => r.correct).length} đúng
@@ -252,7 +302,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
         </span>
       </div>
 
-      {/* Question card */}
+      {/* ═══ ④ THẺ CÂU HỎI: loại từ + từ tiếng Anh + phiên âm, rồi 4 đáp án ═══ */}
       <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-4 animate-slide-up">
         <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-50 to-violet-50 border border-pink-100 rounded-2xl px-5 py-3 mb-2">
@@ -269,6 +319,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
           <p className="text-base text-gray-600 mt-2 font-medium">Từ này có nghĩa là gì?</p>
         </div>
 
+        {/* ⑤ CÁC NÚT ĐÁP ÁN: đúng → xanh ✓, chọn sai → đỏ ✗ (logic giống ExamSolving, dùng correctIndex) */}
         <div className="space-y-3">
           {currentQuestion.options.map((option, index) => {
             let buttonStyle = 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-pink-50 hover:border-pink-300';
@@ -311,7 +362,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
         </div>
       </div>
 
-      {/* Phản hồi — cổ vũ Nhã Phương */}
+      {/* ═══ ⑥ HỘP PHẢN HỒI: lời động viên + nghĩa đúng (nếu sai) + câu ví dụ ═══ */}
       {answerState !== 'unanswered' && (
         <div
           ref={feedbackRef}
@@ -341,7 +392,7 @@ export default function VocabularyPractice({ exam, initialQuestions }: Props) {
         </div>
       )}
 
-      {/* Next button */}
+      {/* ═══ ⑦ NÚT TIẾP THEO ═══ */}
       {answerState !== 'unanswered' && (
         <button
           onClick={handleNext}

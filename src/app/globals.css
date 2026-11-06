@@ -1,17 +1,32 @@
+/*
+ * globals.css: CSS toàn cục, được import một lần trong src/app/layout.tsx.
+ *
+ *   1. @import "tailwindcss"   → bật Tailwind (sinh ra các class như bg-white, p-4...)
+ *   2. Biến màu + dark mode    → còn sót lại từ template mặc định của Next.js
+ *   3. Style cho body
+ *   4. Animation tự viết       → các class animate-fade-in, animate-slide-up, animate-bounce-in
+ *
+ * Giải thích chi tiết: docs/09-tailwind-va-giao-dien.md
+ */
 @import "tailwindcss";
 
+/* ─── 2. Biến màu (từ template mặc định) ─── */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+/* Cho phép dùng biến trên như class Tailwind: bg-background, text-foreground */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* Lưu ý: font Geist chưa từng được nạp, nên 2 biến dưới không có tác dụng. Trang thực tế dùng Arial */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* Lưu ý: khi hệ điều hành bật dark mode, nền body chuyển gần đen nhưng các component
+   vẫn dùng màu chữ cho nền sáng → chữ khó đọc (xem docs/09, mục 4, lỗi 2) */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,18 +34,25 @@
   }
 }
 
+/* ─── 3. Body ─── */
+/* Lưu ý: rule này nằm NGOÀI @layer nên thắng class Tailwind (vốn nằm trong @layer utilities).
+   `background` là thuộc tính viết tắt, đặt luôn background-image = none
+   → gradient khai báo trên <body> trong layout.tsx không hiển thị (xem docs/09, mục 4, lỗi 1) */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ─── 4. Animation tự viết ─── */
+/* Đặt trong @layer utilities để dùng như class Tailwind bình thường */
 @layer utilities {
   /* "both" = giữ nguyên trạng thái cuối sau animation, tránh bị invisible trên iOS Safari */
   .animate-fade-in {
     animation: fadeIn 0.3s ease-in-out both;
   }
 
+  /* Chỉ chạy khi phần tử được TẠO MỚI trong DOM (xem docs/07, mục 7 về `key`) */
   .animate-slide-up {
     animation: slideUp 0.3s ease-out both;
   }

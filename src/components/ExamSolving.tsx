@@ -1,5 +1,23 @@
-'use client';
+'use client'; // Client Component: cần state, effect, onClick. Vẫn được render trước trên server ở lần tải đầu
 
+/**
+ * ExamSolving: màn hình "Giải đề" (URL /exam/[id]/solving).
+ * Nhận prop `exam` từ Server Component src/app/exam/[id]/solving/page.tsx.
+ *
+ * MÁY TRẠNG THÁI (docs/07, mục 3):
+ *   [Chưa trả lời] ──chọn đáp án──▶ [Đã trả lời] ──"Câu tiếp theo"──▶ [Chưa trả lời] (câu kế)
+ *                                        └──câu cuối──▶ [Kết quả] ──"Làm lại"──▶ [Chưa trả lời] (câu 1)
+ *
+ * BẢN ĐỒ FILE:
+ *   §1 Hằng số và hàm phụ   (ngoài component → không bị tạo lại mỗi lần render)
+ *   §2 State, ref, effect
+ *   §3 Giá trị suy ra       (derived state, KHÔNG dùng useState)
+ *   §4 Event handler        (nơi duy nhất state thay đổi)
+ *   §5 UI màn hình KẾT QUẢ  (return sớm khi isFinished)
+ *   §6 UI màn hình LÀM BÀI  (vùng ①..⑦ khớp ảnh docs/images/07-giai-de-chu-thich.png)
+ *
+ * Giải thích chi tiết: docs/07-exam-solving.md
+ */
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Exam } from '@/types';
@@ -12,6 +30,11 @@ interface Props {
 
 type AnswerState = 'unanswered' | 'answered';
 
+// ═════════════════════════════════════════════════════════════════════
+// §1 HẰNG SỐ VÀ HÀM PHỤ
+// ═════════════════════════════════════════════════════════════════════
+
+// Nhãn và màu cho từng loại câu hỏi (hiện ở góc thẻ câu hỏi)
 const typeLabels: Record<string, string> = {
   grammar: '📐 Ngữ pháp',
   vocabulary: '🔤 Từ vựng',
@@ -26,7 +49,7 @@ const typeColors: Record<string, string> = {
   writing: 'bg-purple-100 text-purple-700',
 };
 
-// Tin nhắn cổ vũ Nhã Phương
+// Tin nhắn cổ vũ Nhã Phương, chọn theo `currentIndex % length` (xác định, không random → không lo hydration mismatch)
 const correctMessages = [
   { main: '🌟 Giỏi lắm Nhã Phương!', sub: 'Cứ thế này là đỗ lớp 10 thôi!' },
   { main: '🎉 Chính xác rồi!', sub: 'Nhã Phương thông minh quá!' },
@@ -43,6 +66,7 @@ const incorrectMessages = [
   { main: '🌸 Không sao!', sub: 'Lần này sai, lần sau nhớ mãi!' },
 ];
 
+// 125 → "02:05"
 function formatTime(totalSeconds: number): string {
   const m = Math.floor(totalSeconds / 60);
   const s = totalSeconds % 60;
@@ -53,12 +77,16 @@ function formatTime(totalSeconds: number): string {
  * Render text with **bold** markdown support and newline → <br/> support.
  * Dùng cho questionText, passage, explanation.
  * Ví dụ: "l**ea**f" → l<strong>ea</strong>f
+ *
+ * Không dùng dangerouslySetInnerHTML → nội dung luôn là văn bản, an toàn với XSS.
  */
 function renderBoldText(text: string) {
-  const lines = text.split('\n');
+  const lines = text.split('\n'); // Mỗi dòng → một <span>, từ dòng thứ 2 có <br /> phía trước
   return (
     <>
       {lines.map((line, lineIdx) => {
+        // Nhóm bắt ( ) giúp split GIỮ LẠI phần khớp:
+        // '**D. cost** — đúng' → ['', '**D. cost**', ' — đúng']
         const parts = line.split(/(\*\*.*?\*\*)/g);
         return (
           <span key={lineIdx}>
@@ -76,26 +104,36 @@ function renderBoldText(text: string) {
 }
 
 export default function ExamSolving({ exam }: Props) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
-  const [results, setResults] = useState<Array<{ correct: boolean; selected: number }>>([]);
-  const [isFinished, setIsFinished] = useState(false);
+  // ═════════════════════════════════════════════════════════════════════
+  // §2 STATE, REF, EFFECT  (mọi hook phải đứng trước các lệnh `return` sớm)
+  // ═════════════════════════════════════════════════════════════════════
+
+  const [currentIndex, setCurrentIndex] = useState(0); // Đang ở câu thứ mấy (0-based)
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null); // Đáp án đã chọn, null = chưa chọn
+  const [answerState, setAnswerState] = useState<AnswerState>('unanswered'); // Ghi chú: suy ra được từ selectedAnswer !== null
+  const [results, setResults] = useState<Array<{ correct: boolean; selected: number }>>([]); // Kết quả từng câu đã làm
+  const [isFinished, setIsFinished] = useState(false); // true → hiện màn hình kết quả
 
   // ⏱ Đồng hồ đếm giờ
+  // elapsed: hiện trên màn hình → STATE (đổi thì phải render lại)
+  // startTimeRef, timerRef: chỉ dùng trong logic → REF (đổi không cần render lại)
   const [elapsed, setElapsed] = useState(0);
   // Giá trị thật được gán trong useEffect bên dưới (không gọi Date.now() lúc render)
   const startTimeRef = useRef<number>(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // Bắt đầu đồng hồ khi component mount (chỉ chạy ở trình duyệt, sau hydration).
+  // Tính từ mốc Date.now() thay vì cộng dồn +1: setInterval không chính xác khi tab ở nền.
   useEffect(() => {
     startTimeRef.current = Date.now();
     timerRef.current = setInterval(() => {
       setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
     }, 1000);
+    // Cleanup khi rời trang. Đọc timerRef.current TẠI LÚC cleanup nên dừng được cả interval do handleRestart tạo
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []);
 
+  // Dừng đồng hồ khi làm xong bài
   useEffect(() => {
     if (isFinished && timerRef.current) {
       clearInterval(timerRef.current);
@@ -104,6 +142,7 @@ export default function ExamSolving({ exam }: Props) {
   }, [isFinished]);
 
   // Scroll đến phần phản hồi trên mobile
+  // feedbackRef là ref trỏ tới DOM (hộp phản hồi ⑥). Effect chạy SAU khi DOM cập nhật nên ref đã có giá trị
   const feedbackRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (answerState === 'answered' && feedbackRef.current) {
@@ -113,20 +152,32 @@ export default function ExamSolving({ exam }: Props) {
     }
   }, [answerState]);
 
+  // ═════════════════════════════════════════════════════════════════════
+  // §3 GIÁ TRỊ SUY RA: tính lại mỗi lần render, không lưu vào state
+  //    (lưu riêng sẽ dễ lệch với `results`, xem docs/07, mục 4)
+  // ═════════════════════════════════════════════════════════════════════
+
   const currentQuestion = exam.questions[currentIndex];
   const isLastQuestion = currentIndex === exam.questions.length - 1;
   const correctCount = results.filter((r) => r.correct).length;
   const optionLabels = ['A', 'B', 'C', 'D'];
 
+  // ═════════════════════════════════════════════════════════════════════
+  // §4 EVENT HANDLER
+  // ═════════════════════════════════════════════════════════════════════
+
+  // Bấm một đáp án. Ba lần set... bên dưới chỉ gây MỘT lần render (React batching)
   const handleSelectAnswer = (optionIndex: number) => {
-    if (answerState !== 'unanswered') return;
+    if (answerState !== 'unanswered') return; // Chặn trả lời 2 lần (thêm một lớp ngoài thuộc tính disabled)
     setSelectedAnswer(optionIndex);
     const isCorrect = optionIndex === currentQuestion.correctAnswer;
-    if (isCorrect) playCorrectSound(); else playIncorrectSound();
+    if (isCorrect) playCorrectSound(); else playIncorrectSound(); // Hiệu ứng phụ do hành động → đặt trong handler, không cần effect
     setAnswerState('answered');
+    // Dạng hàm (prev) => ... + tạo mảng MỚI (không push) để React nhận ra thay đổi
     setResults((prev) => [...prev, { correct: isCorrect, selected: optionIndex }]);
   };
 
+  // Bấm "Câu tiếp theo" hoặc "Xem kết quả"
   const handleNext = () => {
     if (isLastQuestion) {
       setIsFinished(true);
@@ -137,6 +188,8 @@ export default function ExamSolving({ exam }: Props) {
     }
   };
 
+  // Bấm "Làm lại bài": đặt mọi state về ban đầu và tự khởi động lại đồng hồ
+  // (effect đồng hồ có deps [] nên không tự chạy lại)
   const handleRestart = () => {
     setCurrentIndex(0);
     setSelectedAnswer(null);
@@ -150,7 +203,10 @@ export default function ExamSolving({ exam }: Props) {
     }, 1000);
   };
 
-  // Màn hình kết quả
+  // ═════════════════════════════════════════════════════════════════════
+  // §5 UI MÀN HÌNH KẾT QUẢ (cùng URL, chỉ khác state isFinished)
+  //    Vùng ①..④ khớp ảnh docs/images/07-ket-qua-chu-thich.png
+  // ═════════════════════════════════════════════════════════════════════
   if (isFinished) {
     const percentage = calculatePercentage(correctCount, exam.questions.length);
     const grade = getGrade(percentage);
@@ -182,9 +238,11 @@ export default function ExamSolving({ exam }: Props) {
           <div className="text-6xl mb-3">
             {percentage >= 80 ? '🏆' : percentage >= 60 ? '🌟' : '💪'}
           </div>
+          {/* ① Xếp loại + lời nhắn */}
           <h2 className="text-2xl font-bold text-gray-800 mb-1">{grade.label}</h2>
           <p className={`text-base font-medium mb-5 ${resultMsg.color}`}>{resultMsg.text}</p>
 
+          {/* ② Điểm: số câu đúng, thanh %, phần trăm */}
           <div className="bg-gradient-to-r from-violet-50 to-pink-50 rounded-2xl p-5 mb-5">
             <div className="text-5xl font-bold text-violet-500 mb-1">
               {correctCount}/{exam.questions.length}
@@ -205,6 +263,7 @@ export default function ExamSolving({ exam }: Props) {
             <span className="text-base font-medium">Thời gian hoàn thành: <strong>{formatTime(elapsed)}</strong></span>
           </div>
 
+          {/* Ô số câu đúng / sai */}
           <div className="grid grid-cols-2 gap-3 mb-5">
             <div className="bg-green-50 rounded-xl p-3">
               <div className="text-3xl font-bold text-green-500">{correctCount}</div>
@@ -216,7 +275,7 @@ export default function ExamSolving({ exam }: Props) {
             </div>
           </div>
 
-          {/* Chi tiết từng câu */}
+          {/* ③ Chi tiết từng câu: C1, C2... xanh/đỏ, vẽ từ mảng results */}
           <div className="text-left mb-5">
             <h3 className="font-bold text-gray-700 mb-2 text-sm">Chi tiết từng câu:</h3>
             <div className="grid grid-cols-5 gap-1.5">
@@ -235,6 +294,7 @@ export default function ExamSolving({ exam }: Props) {
             </div>
           </div>
 
+          {/* ④ Nút làm lại + quay lại đề */}
           <div className="space-y-2">
             <button
               onClick={handleRestart}
@@ -254,13 +314,18 @@ export default function ExamSolving({ exam }: Props) {
     );
   }
 
+  // ═════════════════════════════════════════════════════════════════════
+  // §6 UI MÀN HÌNH LÀM BÀI
+  //    Vùng ①..⑦ khớp ảnh docs/images/07-giai-de-chu-thich.png
+  // ═════════════════════════════════════════════════════════════════════
+
   const correctMsg = correctMessages[currentIndex % correctMessages.length];
   const incorrectMsg = incorrectMessages[currentIndex % incorrectMessages.length];
-  const lastResult = results[results.length - 1];
+  const lastResult = results[results.length - 1]; // Kết quả của câu vừa trả lời (dùng cho hộp phản hồi ⑥)
 
   return (
     <div className="animate-fade-in">
-      {/* Header */}
+      {/* Thanh trên cùng: nút quay lại + "Câu x/y" */}
       <div className="flex items-center justify-between mb-3">
         <Link
           href={`/exam/${exam.id}`}
@@ -275,7 +340,7 @@ export default function ExamSolving({ exam }: Props) {
         </div>
       </div>
 
-      {/* ⏱ Đồng hồ nổi bật — đổi màu theo thời gian */}
+      {/* ═══ ① ĐỒNG HỒ: xanh < 2 phút, vàng < 5 phút, đỏ nhấp nháy từ 5 phút ═══ */}
       <div className={cn(
         'flex items-center justify-center gap-2 rounded-2xl py-3 mb-4 border-2 transition-colors duration-1000',
         elapsed < 120
@@ -288,7 +353,7 @@ export default function ExamSolving({ exam }: Props) {
         <span className="text-4xl font-bold font-mono tracking-widest">{formatTime(elapsed)}</span>
       </div>
 
-      {/* Progress bar */}
+      {/* ═══ ② THANH TIẾN ĐỘ: độ rộng động → dùng style, không dùng class Tailwind ═══ */}
       <div className="bg-gray-200 rounded-full h-2.5 mb-4 overflow-hidden">
         <div
           className="bg-gradient-to-r from-violet-400 to-pink-500 h-2.5 rounded-full transition-all duration-500"
@@ -296,7 +361,7 @@ export default function ExamSolving({ exam }: Props) {
         />
       </div>
 
-      {/* Score tracker */}
+      {/* ═══ ③ ĐẾM ĐÚNG / SAI ═══ */}
       <div className="flex gap-2 mb-4">
         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
           ✅ {results.filter((r) => r.correct).length} đúng
@@ -306,7 +371,9 @@ export default function ExamSolving({ exam }: Props) {
         </span>
       </div>
 
-      {/* Question card */}
+      {/* ═══ ④ THẺ CÂU HỎI: nhãn câu + loại, đoạn văn (nếu có), nội dung, các đáp án ═══
+          Lưu ý: div này không có `key`, nên sang câu mới React dùng lại DOM cũ và
+          animate-slide-up KHÔNG chạy lại (xem docs/07, mục 7) */}
       <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-4 animate-slide-up">
         <div className="flex items-center gap-2 mb-4">
           <span className="bg-violet-100 text-violet-700 text-sm font-bold px-3 py-1 rounded-lg">
@@ -317,6 +384,7 @@ export default function ExamSolving({ exam }: Props) {
           </span>
         </div>
 
+        {/* Đoạn văn chỉ hiện khi có `passage` (trường tuỳ chọn). Hiện chưa đề nào dùng */}
         {currentQuestion.passage && (
           <div className="bg-blue-50 rounded-xl p-4 mb-4 border-l-4 border-blue-400">
             <p className="text-sm text-blue-600 font-medium mb-2">📖 Read the following passage:</p>
@@ -328,6 +396,8 @@ export default function ExamSolving({ exam }: Props) {
           {renderBoldText(currentQuestion.questionText)}
         </p>
 
+        {/* ⑤ CÁC NÚT ĐÁP ÁN. Mỗi nút luôn thuộc 1 trong 4 trường hợp:
+              chưa trả lời → xám | đáp án đúng → xanh ✓ | đáp án chọn sai → đỏ ✗ | còn lại → xám nhạt */}
         <div className="space-y-3">
           {currentQuestion.options.map((option, index) => {
             let buttonStyle = 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-violet-50 hover:border-violet-300';
@@ -343,6 +413,7 @@ export default function ExamSolving({ exam }: Props) {
             return (
               <button
                 key={index}
+                // Truyền một HÀM; viết onClick={handleSelectAnswer(index)} sẽ gọi ngay lúc render
                 onClick={() => handleSelectAnswer(index)}
                 disabled={answerState === 'answered'}
                 style={{ WebkitTapHighlightColor: 'transparent' }}
@@ -370,7 +441,8 @@ export default function ExamSolving({ exam }: Props) {
         </div>
       </div>
 
-      {/* Phản hồi — cổ vũ Nhã Phương */}
+      {/* ═══ ⑥ HỘP PHẢN HỒI: lời động viên + đáp án đúng (nếu sai) + giải thích.
+              Chỉ render khi đã trả lời → mỗi lần xuất hiện là phần tử mới → animation chạy ═══ */}
       {answerState === 'answered' && (
         <div
           ref={feedbackRef}
@@ -401,7 +473,7 @@ export default function ExamSolving({ exam }: Props) {
         </div>
       )}
 
-      {/* Next button */}
+      {/* ═══ ⑦ NÚT TIẾP THEO: câu cuối thì đổi chữ thành "Xem kết quả" ═══ */}
       {answerState === 'answered' && (
         <button
           onClick={handleNext}
